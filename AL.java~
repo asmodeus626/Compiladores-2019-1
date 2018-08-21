@@ -34,8 +34,14 @@ public class AL {
    * Translates characters to character classes
    */
   private static final String ZZ_CMAP_PACKED = 
+<<<<<<< HEAD:AL.java~
     "\12\0\1\2\42\0\1\1\2\0\1\6\11\5\101\0\1\3\1\0"+
     "\1\4\uff82\0";
+=======
+    "\12\0\1\2\1\2\1\2\1\2\37\0\1\1\2\0\1\0\1\3"+
+    "\10\0\47\0\1\0\6\0\1\0\3\0\1\0\2\0\1\0\13\0"+
+    "\1\0\1\0\1\0\7\0\1\2\u1fa2\0\1\2\1\2\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\udfe6\0";
+>>>>>>> 0a1b893cdbb49bede8e81e919553004c7593dfec:AL.java~
 
   /** 
    * Translates characters to character classes
@@ -48,10 +54,17 @@ public class AL {
   private static final int [] ZZ_ACTION = zzUnpackAction();
 
   private static final String ZZ_ACTION_PACKED_0 =
+<<<<<<< HEAD:AL.java~
     "\1\0\3\1\2\2\2\0\1\3\1\0\1\4";
 
   private static int [] zzUnpackAction() {
     int [] result = new int[11];
+=======
+    "\1\1\2\2\1\3\1\4\1\1";
+
+  private static int [] zzUnpackAction() {
+    int [] result = new int[6];
+>>>>>>> 0a1b893cdbb49bede8e81e919553004c7593dfec:AL.java~
     int offset = 0;
     offset = zzUnpackAction(ZZ_ACTION_PACKED_0, offset, result);
     return result;
@@ -76,11 +89,18 @@ public class AL {
   private static final int [] ZZ_ROWMAP = zzUnpackRowMap();
 
   private static final String ZZ_ROWMAP_PACKED_0 =
+<<<<<<< HEAD:AL.java~
     "\0\0\0\7\0\16\0\25\0\34\0\7\0\43\0\52"+
     "\0\7\0\61\0\7";
 
   private static int [] zzUnpackRowMap() {
     int [] result = new int[11];
+=======
+    "\0\0\0\4\0\10\0\14\0\20\0\14";
+
+  private static int [] zzUnpackRowMap() {
+    int [] result = new int[6];
+>>>>>>> 0a1b893cdbb49bede8e81e919553004c7593dfec:AL.java~
     int offset = 0;
     offset = zzUnpackRowMap(ZZ_ROWMAP_PACKED_0, offset, result);
     return result;
@@ -103,12 +123,20 @@ public class AL {
   private static final int [] ZZ_TRANS = zzUnpackTrans();
 
   private static final String ZZ_TRANS_PACKED_0 =
+<<<<<<< HEAD:AL.java~
     "\1\2\1\3\1\2\1\4\1\2\1\5\1\6\10\0"+
     "\1\7\3\0\1\5\2\0\1\10\12\0\2\5\2\7"+
     "\1\11\4\7\1\10\1\12\5\10\4\0\1\13\2\0";
 
   private static int [] zzUnpackTrans() {
     int [] result = new int[56];
+=======
+    "\1\2\1\3\1\2\1\4\5\0\1\5\5\0\1\6"+
+    "\2\5\1\0\1\5";
+
+  private static int [] zzUnpackTrans() {
+    int [] result = new int[20];
+>>>>>>> 0a1b893cdbb49bede8e81e919553004c7593dfec:AL.java~
     int offset = 0;
     offset = zzUnpackTrans(ZZ_TRANS_PACKED_0, offset, result);
     return result;
@@ -146,10 +174,17 @@ public class AL {
   private static final int [] ZZ_ATTRIBUTE = zzUnpackAttribute();
 
   private static final String ZZ_ATTRIBUTE_PACKED_0 =
+<<<<<<< HEAD:AL.java~
     "\1\0\1\11\3\1\1\11\2\0\1\11\1\0\1\11";
 
   private static int [] zzUnpackAttribute() {
     int [] result = new int[11];
+=======
+    "\1\1\1\11\4\1";
+
+  private static int [] zzUnpackAttribute() {
+    int [] result = new int[6];
+>>>>>>> 0a1b893cdbb49bede8e81e919553004c7593dfec:AL.java~
     int offset = 0;
     offset = zzUnpackAttribute(ZZ_ATTRIBUTE_PACKED_0, offset, result);
     return result;
@@ -247,7 +282,11 @@ public class AL {
     char [] map = new char[0x10000];
     int i = 0;  /* index in packed string  */
     int j = 0;  /* index in unpacked array */
+<<<<<<< HEAD:AL.java~
     while (i < 24) {
+=======
+    while (i < 90) {
+>>>>>>> 0a1b893cdbb49bede8e81e919553004c7593dfec:AL.java~
       int  count = packed.charAt(i++);
       char value = packed.charAt(i++);
       do map[j++] = value; while (--count > 0);
@@ -513,6 +552,7 @@ public class AL {
       // store back cached position
       zzMarkedPos = zzMarkedPosL;
 
+<<<<<<< HEAD:AL.java~
       switch (zzAction < 0 ? zzAction : ZZ_ACTION[zzAction]) {
         case 4: 
           { System.out.println("COMENTARIO_2");
@@ -536,6 +576,31 @@ public class AL {
             return YYEOF;
           } 
           else {
+=======
+      if (zzInput == YYEOF && zzStartRead == zzCurrentPos) {
+        zzAtEOF = true;
+        return YYEOF;
+      }
+      else {
+        switch (zzAction < 0 ? zzAction : ZZ_ACTION[zzAction]) {
+          case 1: 
+            { System.out.println("UNOS");
+            }
+          case 5: break;
+          case 2: 
+            { System.out.print(yytext());
+            }
+          case 6: break;
+          case 3: 
+            { System.out.println("DIGITO");
+            }
+          case 7: break;
+          case 4: 
+            { System.out.println("GUION");
+            }
+          case 8: break;
+          default:
+>>>>>>> 0a1b893cdbb49bede8e81e919553004c7593dfec:AL.java~
             zzScanError(ZZ_NO_MATCH);
           }
       }
