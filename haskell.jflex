@@ -8,8 +8,11 @@
 %standalone // Crea una función.
 
 SALUDO = hola
-DIGITO = [0,9]
+COMENTARIO_1 = --~\n
+COMENTARIO_2 = \{-~-\}
+ENTERO = 0 | [1-9][0-9]*
 
 %% // Aquí se definen las macros.
-1*		 {System.out.println("UNOS");}
-{DIGITO} {System.out.println("DIGITO");}
+{COMENTARIO_1} {System.out.println("COMENTARIO_1");}
+{COMENTARIO_2} {System.out.println("COMENTARIO_2");}
+{ENTERO}       {System.out.println("ENTERO ("+yytext()+")");}
