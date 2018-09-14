@@ -1,1 +1,7 @@
-1
+True
+diezTlacuaches
+3
+8.37
+"Nepe para Peto :3"
+while
+%
