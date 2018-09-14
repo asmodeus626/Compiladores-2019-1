@@ -10,9 +10,10 @@ import java.util.Stack;
 public String resultado = ""; //Resultado del análisis léxico.
 public int num_espacios = 0; //Cuenta el número de espacios.
 public Stack<Integer> pila = new Stack();
+public int num_linea = 1;
 
 public void cerrar(){
-    System.out.print("\n"+resultado);
+    System.out.println(resultado);
     System.exit(0);
 }
 
@@ -26,13 +27,18 @@ public void reset(){ //Se va a ejecutar cada vez que se lea un caracter diferent
                 pila.push(num_espacios);
                 resultado+="INDENTA("+num_espacios+")"; //Se imprime el número de indentación.
             }else{
-                while(!pila.isEmpty() && pila.peek()>num_espacios){
+                while(!pila.isEmpty() && pila.peek() > num_espacios){
                     resultado+="DEINDENTA("+pila.pop()+")\n";
+                }
+
+                if(pila.isEmpty() || pila.peek() < num_espacios ){ //En este punto el tope de la pila debería ser igual a num_espacios.
+                    resultado+="Error de indentación en la línea "+num_linea;
+                    cerrar();
                 }
             }
         }
     }else{
-        if(yystate()==I){
+        if(yystate()==I){ //Si el número de espacios era 0
             while(!pila.isEmpty()){
                 resultado+="DEINDENTA("+pila.pop()+")\n";
             }
@@ -66,12 +72,12 @@ ENTERO = [1-9][0-9]* | 0
 REAL =  ([1-9][0-9]* | 0)\.[0-9]*
 CADENA = \" ~\"
 OPERADOR = "+"|"-"|"*"|"/"|"%"|"<"|">"|">="|"<="|"="|"!"|"=="|"="
-LINEA_VACIA = [ ]+\n | \t+\n | "\n"
+LINEA_VACIA = ([ ] | \t)+\n | "\n"
 SALTO = \r|\n|\r\n
 COMENTARIO = #~\n
 
 %%
-{COMENTARIO}         {yybegin(I);}
+{COMENTARIO}         {yybegin(I); num_linea++;}
 {BOOLEANO}           {reset(); resultado+="BOOLEANO("+yytext()+")";}
 {PALABRA_RESERVADA}  {reset(); resultado+="PALABRA_RESERVADA("+yytext()+")";}
 {IDENTIFICADOR}      {reset(); resultado+="IDENTIFICADOR("+yytext()+")";}
@@ -81,10 +87,10 @@ COMENTARIO = #~\n
 {OPERADOR} {reset(); resultado+="OPERADOR("+yytext()+")";}
 \( | \)              {reset();}
 ":"                  {reset();        resultado+="SEPARADOR(:)";}
-<I> {LINEA_VACIA} {}
+<I> {LINEA_VACIA} {num_linea++;}
 <I> [ ] {num_espacios++;}
 <I> \t {num_espacios+=4;}
-{SALTO}              {resultado+="SALTO\n"; yybegin(I);}
+{SALTO}              {resultado+="SALTO\n"; yybegin(I); num_linea++;}
 <YYINITIAL> [ ] {}
 <YYINITIAL> \t {}
-.                    {System.out.print("ERROR DE SINTÁXIS, EL LEXEMA \""+yytext()+"\" NO FUE ENCONTRADO. :@\n");}
+.                    {resultado+="Error léxico en línea "+num_linea; cerrar();}

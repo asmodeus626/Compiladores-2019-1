@@ -1,4 +1,4 @@
-#FIZZBUZZ hata 30
+#Fizzbuzz hasta 30
 
 contador = 1
 while(contador < 30):
@@ -9,6 +9,6 @@ while(contador < 30):
         print "buzz"
 	
     if contador % 5 != 0 and contador % 3 != 0:
-	print contador
+        print contador
 
     contador = contador + 1
