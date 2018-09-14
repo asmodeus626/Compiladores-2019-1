@@ -8,7 +8,7 @@ while(contador < 30):
 	if contador % 5 == 0:
 		print "buzz"
 	
-	if contador % 5 != 0 or contador % 3 != 0:
+	if contador % 5 != 0 and contador % 3 != 0:
 		print contador
 
 	contador = contador + 1
