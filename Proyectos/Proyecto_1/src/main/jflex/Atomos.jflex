@@ -21,6 +21,8 @@ ENTERO = [1-9][0-9]* | 0
 REAL =  ([1-9][0-9]* | 0)\.[0-9]*
 CADENA = \" ~\"
 OPERADOR = "+"|"-"|"*"|"/"|"%"|"<"|">"|">="|"<="|"="|"!"|"=="|"="
+SALTO = \r|\n|\r\n
+BLANCOS = [ \t\f]
 
 %%
 #.*       {System.out.print("COMENTARIO");}
@@ -31,3 +33,5 @@ OPERADOR = "+"|"-"|"*"|"/"|"%"|"<"|">"|">="|"<="|"="|"!"|"=="|"="
 {ENTERO} {System.out.print("ENTERO("+yytext()+")");}
 {CADENA} {System.out.print("CADENA("+yytext()+")");}
 {OPERADOR} {System.out.print("OPERADOR("+yytext()+")");}
+{SALTO} {System.out.println("SALTO");}
+{BLANCOS} {System.out.print("");}
