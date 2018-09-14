@@ -71,18 +71,20 @@ SALTO = \r|\n|\r\n
 COMENTARIO = #~\n
 
 %%
-{COMENTARIO} {yybegin(I);}
-{BOOLEANO} {reset(); resultado+="BOOLEANO("+yytext()+")";}
-{PALABRA_RESERVADA} {reset(); resultado+="PALABRA_RESERVADA("+yytext()+")";}
-{IDENTIFICADOR}  {reset(); resultado+="IDENTIFICADOR("+yytext()+")";}
-{REAL} {reset(); resultado+="REAL("+yytext()+")";}
-{ENTERO} {reset(); resultado+="ENTERO("+yytext()+")";}
-{CADENA} {reset(); resultado+="CADENA("+yytext()+")";}
+{COMENTARIO}         {yybegin(I);}
+{BOOLEANO}           {reset(); resultado+="BOOLEANO("+yytext()+")";}
+{PALABRA_RESERVADA}  {reset(); resultado+="PALABRA_RESERVADA("+yytext()+")";}
+{IDENTIFICADOR}      {reset(); resultado+="IDENTIFICADOR("+yytext()+")";}
+{REAL} {reset();     resultado+="REAL("+yytext()+")";}
+{ENTERO} {reset();   resultado+="ENTERO("+yytext()+")";}
+{CADENA} {reset();   resultado+="CADENA("+yytext()+")";}
 {OPERADOR} {reset(); resultado+="OPERADOR("+yytext()+")";}
-":" {reset(); resultado+="SEPARADOR(:)";}
+\( | \)              {reset();}
+":"                  {reset();        resultado+="SEPARADOR(:)";}
 <I> {LINEA_VACIA} {}
 <I> [ ] {num_espacios++;}
 <I> \t {num_espacios+=4;}
-{SALTO} {resultado+="SALTO\n"; yybegin(I);}
+{SALTO}              {resultado+="SALTO\n"; yybegin(I);}
 <YYINITIAL> [ ] {}
 <YYINITIAL> \t {}
+.                    {System.out.print("ERROR DE SINTÁXIS, EL LEXEMA \""+yytext()+"\" NO FUE ENCONTRADO. :@\n");}
