@@ -6,7 +6,7 @@ public class AnalizadorLexico {
 
     public AnalizadorLexico(String archivo){
         try {
-            Reader lector = new FileReader("src/main/resources/test.txt");
+            Reader lector = new FileReader(archivo);
             lexer = new Alexico(lector);
         }
         catch(FileNotFoundException ex) {
