@@ -3,10 +3,12 @@ import java.io.*;
 
 public class AnalizadorLexico {
     Alexico lexer;
+    public static String nom_archivo;
 
     public AnalizadorLexico(String archivo){
         try {
-            Reader lector = new FileReader(archivo);
+            nom_archivo = archivo;
+            Reader lector = new FileReader("src/main/resources/"+nom_archivo+".py");
             lexer = new Alexico(lector);
         }
         catch(FileNotFoundException ex) {

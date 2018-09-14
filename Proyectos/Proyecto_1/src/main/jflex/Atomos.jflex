@@ -52,6 +52,16 @@ public void reset(){ //Se va a ejecutar cada vez que se lea un caracter diferent
     yybegin(YYINITIAL);
     num_espacios = 0;
 }
+
+public void escribeArchivo(){
+    try{
+        FileWriter fw1 = new FileWriter("out/"+AnalizadorLexico.nom_archivo+".plx");
+        BufferedWriter bw1 = new BufferedWriter(fw1);
+        bw1.write(resultado);
+        bw1.close();
+    }catch(Exception ex){}
+}
+
 %}
 
 %eof{
@@ -61,6 +71,8 @@ while(!pila.isEmpty()){
 }
 
 System.out.println("\n"+resultado);
+
+escribeArchivo();
 %eof}
 
 %public
