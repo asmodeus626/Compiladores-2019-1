@@ -290,7 +290,7 @@ final static String yyrule[] = {
 "factor : '-' NUMBER",
 };
 
-//#line 36 "../../../../../../src/main/resources/gramatica1.y"
+//#line 33 "../../../../../../src/main/resources/gramatica1.y"
 
   private Atomos lexer;
   public static short linea = 0 ;
@@ -307,7 +307,6 @@ final static String yyrule[] = {
     return yyl_return;
   }
 
-
     public void yyerror (String error) {
         System.err.println ("[ERROR] " + error);
     }
@@ -320,7 +319,7 @@ final static String yyrule[] = {
   public static void main(String args[]) throws IOException {
     Parser yyparser;
     yyparser = new Parser(new FileReader("src/main/resources/test.txt"));
-    yyparser.yydebug = true; //true para que imprima el proceso.
+    yyparser.yydebug = false; //true para que imprima el proceso.
     int condicion = yyparser.yyparse();
 
     if(condicion != 0){
@@ -329,7 +328,7 @@ final static String yyrule[] = {
       yyparser.yyerror("La expresión aritmética no esta bien formada. en la línea " + linea);
     }
   }
-//#line 260 "Parser.java"
+//#line 259 "Parser.java"
 //###############################################################
 // method: yylexdebug : check lexer state
 //###############################################################
@@ -484,14 +483,46 @@ boolean doaction;
       {
 //########## USER-SUPPLIED ACTIONS ##########
 case 3:
-//#line 18 "../../../../../../src/main/resources/gramatica1.y"
-{ linea++;  System.out.println("[ok]");}
+//#line 15 "../../../../../../src/main/resources/gramatica1.y"
+{linea++;  System.out.println("[ok] "+val_peek(1).ival);}
 break;
 case 4:
-//#line 19 "../../../../../../src/main/resources/gramatica1.y"
-{ linea++;  System.out.println("[ok]");}
+//#line 16 "../../../../../../src/main/resources/gramatica1.y"
+{linea++;  System.out.println("[ok] "+val_peek(0).ival); }
 break;
-//#line 417 "Parser.java"
+case 5:
+//#line 19 "../../../../../../src/main/resources/gramatica1.y"
+{yyval = new ParserVal(val_peek(2).ival + val_peek(0).ival);}
+break;
+case 6:
+//#line 20 "../../../../../../src/main/resources/gramatica1.y"
+{yyval = new ParserVal(val_peek(2).ival - val_peek(0).ival);}
+break;
+case 7:
+//#line 21 "../../../../../../src/main/resources/gramatica1.y"
+{yyval = val_peek(0);}
+break;
+case 8:
+//#line 24 "../../../../../../src/main/resources/gramatica1.y"
+{yyval = new ParserVal(val_peek(2).ival * val_peek(0).ival);}
+break;
+case 9:
+//#line 25 "../../../../../../src/main/resources/gramatica1.y"
+{yyval = new ParserVal(val_peek(2).ival / val_peek(0).ival);}
+break;
+case 10:
+//#line 26 "../../../../../../src/main/resources/gramatica1.y"
+{yyval = val_peek(0);}
+break;
+case 11:
+//#line 29 "../../../../../../src/main/resources/gramatica1.y"
+{yyval = val_peek(0);}
+break;
+case 12:
+//#line 30 "../../../../../../src/main/resources/gramatica1.y"
+{yyval = new ParserVal(- val_peek(0).ival);}
+break;
+//#line 448 "Parser.java"
 //########## END OF USER-SUPPLIED ACTIONS ##########
     }//switch
     //#### Now let's reduce... ####

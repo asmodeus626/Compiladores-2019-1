@@ -24,7 +24,8 @@ OPERADOR = "+" | "-" | "*" | "/"
 
 {NL}   {return Parser.NL;}
 
-{NUMBER}  {return Parser.NUMBER;}
+{NUMBER}  {yyparser.yylval = new ParserVal(Integer.parseInt(yytext()));
+           return Parser.NUMBER;}
 
 [ \t]+ { }
 

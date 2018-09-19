@@ -12,22 +12,22 @@ input:  /* cadena vacía */
        | input line
        ;
 
-line : expr NL {linea++;  System.out.println("[ok]"); }
-     | expr {linea++;  System.out.println("[ok]"); }
+line : expr NL {linea++;  System.out.println("[ok] "+$1.ival); }
+     | expr {linea++;  System.out.println("[ok] "+$1.ival); }
      ;
 
-expr : term '+' expr
-     | term '-' expr
-     | term
+expr : term '+' expr {$$ = new ParserVal($1.ival + $3.ival);}
+     | term '-' expr {$$ = new ParserVal($1.ival - $3.ival);}
+     | term {$$ = $1;}
      ;
 
-term : factor '*' term
-     | factor '/' term
-     | factor
+term : factor '*' term {$$ = new ParserVal($1.ival * $3.ival);}
+     | factor '/' term {$$ = new ParserVal($1.ival / $3.ival);}
+     | factor {$$ = $1;}
      ;
 
-factor : NUMBER
-     | '-' NUMBER
+factor : NUMBER {$$ = $1;}
+     | '-' NUMBER {$$ = new ParserVal(- $2.ival);}
      ;
 %%
 
@@ -51,7 +51,6 @@ factor : NUMBER
         System.err.println ("[ERROR] " + error);
     }
 
-
     public Parser(Reader r) {
         lexer = new Atomos(r, this);
     }
@@ -59,7 +58,7 @@ factor : NUMBER
   public static void main(String args[]) throws IOException {
     Parser yyparser;
     yyparser = new Parser(new FileReader("src/main/resources/test.txt"));
-    yyparser.yydebug = true; //true para que imprima el proceso.
+    yyparser.yydebug = false; //true para que imprima el proceso.
     int condicion = yyparser.yyparse();
 
     if(condicion != 0){
