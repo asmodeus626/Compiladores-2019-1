@@ -29,7 +29,7 @@
         <configuration>
           <workingDirectory>src/main/java/com/mycompany/proyecto_2</workingDirectory>
           <executable>byaccj</executable>
-          <commandlineArgs>-Jpackage=com.mycompany.proyecto_2 ../../../../../../src/main/resources/gramatica1.y</commandlineArgs>
+          <commandlineArgs>-Jpackage=com.mycompany.proyecto_2 ../../../../../../src/main/resources/gramatica.y</commandlineArgs>
         </configuration>
       </plugin>
         

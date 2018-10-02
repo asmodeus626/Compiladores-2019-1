@@ -3,8 +3,16 @@
   import java.io.*;
 %}
 
-%token NL
-%token NUMBER
+%token SALTO
+%token INDENTA
+%token DEINDENTA
+%token IDENTIFICADOR
+%token ENTERO
+%token REAL
+%token CADENA
+%token BOOLEANO
+%token AND OR NOT WHILE IF ELSE ELIF PRINT
+%token IGUAL MAIGUAL MEIGUAL DIF EXP DIV
      
 %%
 
@@ -12,17 +20,17 @@ input:  /* cadena vacía */
        | input line
        ;
 
-line : expr NL {linea++;  System.out.println("[ok] "+$1.ival); }
+line : expr NL {linea++;  System.out.println("[ok] "+$1.ival);}
      | expr {linea++;  System.out.println("[ok] "+$1.ival); }
      ;
 
-expr : term '+' expr {$$ = new ParserVal($1.ival + $3.ival);}
-     | term '-' expr {$$ = new ParserVal($1.ival - $3.ival);}
+expr : expr '+' term {$$ = new ParserVal($1.ival + $3.ival);}
+     | expr '-' term {$$ = new ParserVal($1.ival - $3.ival);}
      | term {$$ = $1;}
      ;
 
-term : factor '*' term {$$ = new ParserVal($1.ival * $3.ival);}
-     | factor '/' term {$$ = new ParserVal($1.ival / $3.ival);}
+term : term '*' factor {$$ = new ParserVal($1.ival * $3.ival);}
+     | term '/' factor {$$ = new ParserVal($1.ival / $3.ival);}
      | factor {$$ = $1;}
      ;
 
@@ -46,10 +54,10 @@ factor : NUMBER {$$ = $1;}
     return yyl_return;
   }
 
-
     public void yyerror (String error) {
         System.err.println ("[ERROR] " + error);
     }
+
 
     public Parser(Reader r) {
         lexer = new Atomos(r, this);

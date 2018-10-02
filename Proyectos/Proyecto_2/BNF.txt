@@ -57,7 +57,7 @@ EBNF
 
 <while_stmt> := "while" <test> ":" <suite>
 
-<suite> ::= <simple_stmt> 
+<suite> ::= <simple_stmt>
         | SALTO INDENTA <stmt2> DEINDENTA
 
 <stmt2> ::= <stmt2> <stmt>
@@ -65,10 +65,10 @@ EBNF
 
 <test>: <or_test>
 
-<or_test> ::= <and_test> "or" <or_test>
+<or_test> ::= <or_test> "or" <and_test>
           |   <and_test>
 
-<and_test> ::= <not_test> "and" <and_test>
+<and_test> ::= <and_test> "and" <not_test>
            |   <not_test>
 
 <not_test> ::= "not" <not_test>
@@ -84,19 +84,18 @@ EBNF
           |   "<="
           |   "!="
 
-<expr> ::= <term> "+" <term>
-         | <term> "-" <term>
+<expr> ::= <expr> "+" <term>
+         | <expr> "-" <term>
          | <term>
 
-<term> ::= <factor> "*" <term>
-         | <factor> "/" <term>
-         | <factor> "%" <term>
-         | <factor> "//" <term>
+<term> ::= <term> "*" <factor>
+         | <term> "/" <factor>
+         | <term> "%" <factor>
+         | <term> "//" <factor>
          | <factor>
 
 <factor> ::= "+" <factor>
            | "-" <factor>
-           | <factor>
            | <power>
 
 <power> ::= <atom> "**" <factor>
