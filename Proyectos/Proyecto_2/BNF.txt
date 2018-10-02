@@ -84,7 +84,27 @@ EBNF
           |   "<="
           |   "!="
 
-<expr> ::= <term> "+" <expr>
-       |   <term> "-" <expr>
-       |   <term>
+<expr> ::= <term> "+" <term>
+         | <term> "-" <term>
+         | <term>
 
+<term> ::= <factor> "*" <term>
+         | <factor> "/" <term>
+         | <factor> "%" <term>
+         | <factor> "//" <term>
+         | <factor>
+
+<factor> ::= "+" <factor>
+           | "-" <factor>
+           | <factor>
+           | <power>
+
+<power> ::= <atom> "**" <factor>
+          | <atom>
+
+<atom> ::= IDENTIFICADOR
+         | ENTERO 
+         | CADENA
+         | REAL 
+         | BOOLEANO 
+         | "(" <test> ")"
