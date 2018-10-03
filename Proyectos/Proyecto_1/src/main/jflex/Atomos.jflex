@@ -65,21 +65,20 @@ public void escribeArchivo(){
 %}
 
 %eof{
+    while(!pila.isEmpty()){
+        agrRes("DEINDENTA("+pila.pop()+")\n");
+    }
 
-while(!pila.isEmpty()){
-    agrRes("DEINDENTA("+pila.pop()+")\n");
-}
+    System.out.println("\n"+resultado);
 
-System.out.println("\n"+resultado);
-
-escribeArchivo();
+    escribeArchivo();
 %eof}
 
 %public
 %class Alexico
 %unicode
 %standalone
-%states I
+%xstates I
 
 BOOLEANO = "True" | "False"
 PALABRA_RESERVADA = "and" | "or" | "not" | "while" | "if" | "else" | "elif" | "print"
@@ -95,19 +94,20 @@ COMENTARIO = #~\n
 
 %%
 {COMENTARIO}         {yybegin(I); num_linea++;}
-{BOOLEANO}           {reset(); agrRes("BOOLEANO("+yytext()+")");}
-{PALABRA_RESERVADA}  {reset(); agrRes("PALABRA_RESERVADA("+yytext()+")");}
-{IDENTIFICADOR}      {reset(); agrRes("IDENTIFICADOR("+yytext()+")");}
-{REAL}               {reset(); agrRes("REAL("+yytext()+")");}
-{ENTERO}             {reset(); agrRes("ENTERO("+yytext()+")");}
-{CADENA}             {reset(); agrRes("CADENA("+yytext()+")");}
+{BOOLEANO}           {agrRes("BOOLEANO("+yytext()+")");}
+{PALABRA_RESERVADA}  {agrRes("PALABRA_RESERVADA("+yytext()+")");}
+{IDENTIFICADOR}      {agrRes("IDENTIFICADOR("+yytext()+")");}
+{REAL}               {agrRes("REAL("+yytext()+")");}
+{ENTERO}             {agrRes("ENTERO("+yytext()+")");}
+{CADENA}             {agrRes("CADENA("+yytext()+")");}
 {ERROR_CADENA}       {agrRes("\nError de cadena en linea "+num_linea); dperr = true;}
-{OPERADOR}           {reset(); agrRes("OPERADOR("+yytext()+")");}
-\( | \)              {reset();}
-":"                  {reset(); agrRes("SEPARADOR(:)");}
+{OPERADOR}           {agrRes("OPERADOR("+yytext()+")");}
+\( | \)              {}
+":"                  {agrRes("SEPARADOR(:)");}
 <I> {LINEA_VACIA} {num_linea++;}
 <I> [ ] {num_espacios++;}
 <I> \t {num_espacios+=4;}
+<I> . {reset(); yypushback(1);}
 {SALTO}              {agrRes("SALTO\n"); yybegin(I); num_linea++;}
 <YYINITIAL> [ ] {}
 <YYINITIAL> \t {}

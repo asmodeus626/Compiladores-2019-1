@@ -1,4 +1,5 @@
 contador = 1
+
 while(contador < 30):
     if contador % 3 == 0:
         print "fizz"
