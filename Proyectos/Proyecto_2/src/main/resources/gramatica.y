@@ -37,18 +37,18 @@ expr_stmt : test '=' test
           | test
           ;
 
-print_stmt := PRINT test
+print_stmt : PRINT test
            ;
 
-compound_stmt := if_stmt
+compound_stmt : if_stmt
               | while_stmt
               ;
 
-if_stmt := IF test ':' suite ELSE ':' suite
+if_stmt : IF test ':' suite ELSE ':' suite
         |  IF test ':' suite
         ;
 
-while_stmt := WHILE test ':' suite
+while_stmt : WHILE test ':' suite
            ;
 
 suite : simple_stmt
