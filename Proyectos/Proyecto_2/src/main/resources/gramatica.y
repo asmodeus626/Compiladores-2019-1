@@ -16,27 +16,104 @@
      
 %%
 
-input:  /* cadena vacía */
-       | input line
+file_input : file_input SALTO {System.out.println("Está bien hecho.");}
+           | file_input stmt
+           | SALTO
+           | stmt
+           ;
+
+stmt : simple_stmt
+     | compound_stmt
+     ;
+
+simple_stmt : small_stmt SALTO
+            ;
+
+small_stmt : expr_stmt 
+           | print_stmt
+           ;
+
+expr_stmt : test '=' test
+          | test
+          ;
+
+print_stmt := PRINT test
+           ;
+
+compound_stmt := if_stmt
+              | while_stmt
+              ;
+
+if_stmt := IF test ':' suite ELSE ':' suite
+        |  IF test ':' suite
+        ;
+
+while_stmt := WHILE test ':' suite
+           ;
+
+suite : simple_stmt
+      | SALTO INDENTA stmt2 DEINDENTA
+      ;
+
+stmt2 : stmt2 stmt
+      | stmt
+      ;
+
+test : or_test
+     ;
+
+or_test : or_test OR and_test
+        |   and_test
+        ;
+
+and_test : and_test AND not_test
+         | not_test
+         ;
+
+not_test : NOT not_test
+         | comparison
+         ;
+
+comparison : expr comp_op comparison
+           | expr
+           ;
+
+comp_op : '<'
+        | '>'
+        | IGUAL
+        | MAIGUAL
+        | MEIGUAL
+        | DIF
+        ;
+
+expr : expr '+' term
+     | expr '-' term
+     | term
+     ;
+
+term : term '*' factor
+     | term '/' factor
+     | term '%' factor
+     | term DIV factor
+     | factor
+
+factor : '+' factor
+       | '-' factor
+       | power
        ;
 
-line : expr NL {linea++;  System.out.println("[ok] "+$1.ival);}
-     | expr {linea++;  System.out.println("[ok] "+$1.ival); }
+power : atom EXP factor
+      | atom
+      ;
+
+atom : IDENTIFICADOR
+     | ENTERO 
+     | CADENA
+     | REAL 
+     | BOOLEANO 
+     | '(' test ')'
      ;
 
-expr : expr '+' term {$$ = new ParserVal($1.ival + $3.ival);}
-     | expr '-' term {$$ = new ParserVal($1.ival - $3.ival);}
-     | term {$$ = $1;}
-     ;
-
-term : term '*' factor {$$ = new ParserVal($1.ival * $3.ival);}
-     | term '/' factor {$$ = new ParserVal($1.ival / $3.ival);}
-     | factor {$$ = $1;}
-     ;
-
-factor : NUMBER {$$ = $1;}
-     | '-' NUMBER {$$ = new ParserVal(- $2.ival);}
-     ;
 %%
 
   private Atomos lexer;
