@@ -16,7 +16,7 @@ input : /*Cadena vacía*/
 file_input : file_input SALTO {$$ = $1;}
            | file_input stmt {$1.agregaHijoFinal($2); $$ = $1;}
            | SALTO
-           | stmt {$$ = $1;}
+           | stmt {$$ = new NodoStmts($1);}
            ;
 
 stmt : simple_stmt {$$ = $1;}
@@ -84,12 +84,12 @@ comp_op : '<' {$$ = new MenorNodo(null , null);}
         ;
 
 expr : expr '+' term {$$ = new AddNodo($1,$3);}
-     | expr '-' term {$$ = new AddNodo($1,$3);}
+     | expr '-' term {$$ = new DifNodo($1,$3);}
      | term {$$ = $1;}
      ;
 
 term : term '*' factor {$$ = new PorNodo($1 , $3);}
-     | term '/' factor {$$ = new ModuloNodo($1 , $3);}
+     | term '/' factor {$$ = new DivNodo($1 , $3);}
      | term '%' factor {$$ = new ModuloNodo($1 , $3);}
      | term DIV factor {$$ = new DivisionEnteraNodo($1 , $3);}
      | factor {$$ = $1;}

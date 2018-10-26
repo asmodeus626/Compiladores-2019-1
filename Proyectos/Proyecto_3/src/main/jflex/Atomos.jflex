@@ -127,7 +127,7 @@ COMENTARIO = #~\n
 {BOOLEANO}           {yyparser.yylval = new BooleanHoja(yytext().equals("True"));
                       return Parser.BOOLEANO;}
 {PALABRA_RESERVADA}  {return reservada(yytext());}
-{IDENTIFICADOR}      {new IdentifierHoja(yytext());
+{IDENTIFICADOR}      {yyparser.yylval = new IdentifierHoja(yytext());
                       return Parser.IDENTIFICADOR;}
 {REAL}               {yyparser.yylval = new FloatHoja(Double.parseDouble(yytext()));
                       return Parser.REAL;}
