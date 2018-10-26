@@ -1,7 +1,10 @@
 var searchData=
 [
-  ['indenta',['INDENTA',['../classast_1_1Flexer.html#a9c1149da06d27874d4bb6d86d1a3c0af',1,'ast::Flexer']]],
-  ['indentacion',['indentacion',['../classast_1_1Flexer.html#ac8c4b582ef04517570fab2907743f8ab',1,'ast::Flexer']]],
+  ['i',['I',['../classast_1_1Flexer.html#a4a48abba56b4002ea07d44b5fb49a1fb',1,'ast::Flexer']]],
+  ['identifierhoja',['IdentifierHoja',['../classast_1_1patron_1_1compuesto_1_1IdentifierHoja.html',1,'ast::patron::compuesto']]],
+  ['ifnodo',['IfNodo',['../classast_1_1patron_1_1compuesto_1_1IfNodo.html',1,'ast::patron::compuesto']]],
+  ['ifstmts',['IfStmts',['../classast_1_1patron_1_1compuesto_1_1IfStmts.html',1,'ast::patron::compuesto']]],
+  ['igualigualnodo',['IgualIgualNodo',['../classast_1_1patron_1_1compuesto_1_1IgualIgualNodo.html',1,'ast::patron::compuesto']]],
   ['inthoja',['IntHoja',['../classast_1_1patron_1_1compuesto_1_1IntHoja.html',1,'ast::patron::compuesto']]],
   ['ival',['ival',['../classast_1_1patron_1_1compuesto_1_1Variable.html#a68d29648db7a0b0e4d79af012de8eeec',1,'ast::patron::compuesto::Variable']]]
 ];

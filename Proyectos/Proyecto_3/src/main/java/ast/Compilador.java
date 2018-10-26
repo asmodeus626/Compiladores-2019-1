@@ -1,4 +1,4 @@
-//import Parser;
+
 package ast;
 import java.io.*;
 import ast.patron.compuesto.*;
@@ -19,15 +19,15 @@ public class Compilador{
     public void ConstruyeAST(boolean debug){
         parser.yydebug = debug;
         parser.yyparse(); // análisis léxico, sintáctio y constucción del AST
-        raízAST = parser.raíz;
+        raízAST = parser.raiz;
     }
 
     public void imprimeAST(){
-        parser.raíz.accept(v_print);
+        parser.raiz.accept(v_print);
     }
 
     public static void main(String[] args){
-            String archivo = "src/main/resources/test.p";
+            String archivo = "src/main/resources/test.txt";
         try{
             Reader a = new FileReader(archivo);
             Compilador c  = new Compilador(a);

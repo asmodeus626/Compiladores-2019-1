@@ -76,7 +76,7 @@ CERO             	=        0+
 ENTERO			= 	{CERO} | {DIGIT}+
 REAL			= 	{ENTERO}? {PUNTO} {ENTERO}?
 SALTO                   =       "\n"
-IDENTIFIER       	= 	([:letter:] | "_" )([:letter:] | "_" | [0-9])*
+IDENTIFICADOR       	= 	([:letter:] | "_" )([:letter:] | "_" | [0-9])*
 CHAR_LITERAL   	        = 	([:letter:] | [:digit:] | "_" | "$" | " " | "#" |
                                 {OPERADOR} | {SEPARADOR}) | "\\"
 OPERADOR  		=       ("+" | "-" | "*" | "**" | "/" | "//" | "%" |
@@ -101,7 +101,8 @@ BOOLEAN		        =	("True" | "False")
 					    yybegin(CODIGO);}
 }
 <CADENA>{
-  {CHAR_LITERAL}+                         { cadena = yytext();}
+  {CHAR_LITERAL}+                         { cadena = yytext();
+                                            yyparser.yylval = new StringHoja(cadena);}
   \"					  { yybegin(CODIGO);
                                             cadena = "";
 					    return Parser.CADENA;}
@@ -137,11 +138,14 @@ BOOLEAN		        =	("True" | "False")
   "if"                                    { return Parser.IF;}
   "print"				  { return Parser.PRINT;}
   {SALTO}				  { yybegin(INDENTA); actual=0; return Parser.SALTO;}
-  {REAL}				  { return Parser.REAL;}
+  {REAL}				  { yyparser.yylval = new FloatHoja(Double.parseDouble(yytext()));
+                                            return Parser.REAL;}
   {ENTERO}				  { yyparser.yylval = new IntHoja(Integer.parseInt(yytext()));
                                             return Parser.ENTERO; }
-  {BOOLEAN}                               { return Parser.BOOLEANO;}
-  {IDENTIFIER}				  { }
+  {BOOLEAN}                               { yyparser.yylval = new BooleanHoja(yytext().equals("True"));
+                                            return Parser.BOOLEANO;}
+  {IDENTIFICADOR}		          { yyparser.yylval = new IdentifierHoja(yytext());
+                                            return Parser.IDENTIFICADOR;}
   " "					  { }
 }
 <INDENTA>{
