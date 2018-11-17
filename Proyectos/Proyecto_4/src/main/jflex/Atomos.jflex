@@ -110,17 +110,17 @@ int reservada(String re){
 %xstates I
 %byaccj
 
-BOOLEANO = "True" | "False"
+BOOLEANO          = "True" | "False"
 PALABRA_RESERVADA = "and" | "or" | "not" | "while" | "if" | "else" | "elif" | "print"
-IDENTIFICADOR = [a-zA-Z]([a-zA-Z]|_|[0-9])*
-ENTERO = [1-9][0-9]* | 0
-REAL =  ([1-9][0-9]* | 0)\.[0-9]*
-CADENA = \" ~\"
-ERROR_CADENA = \" 
-OPERADOR = "+"|"-"|"**"|"*"|"//"|"/"|"%"|"<"|">"|">="|"<="|"="|"!="|"!"|"=="
-LINEA_VACIA = ([ ] | \t)+\n | "\n"
-SALTO = \r|\n|\r\n
-COMENTARIO = #~\n
+IDENTIFICADOR     = [a-zA-Z]([a-zA-Z]|_|[0-9])*
+ENTERO            = [1-9][0-9]* | 0
+REAL              = ([1-9][0-9]* | 0)\.[0-9]*
+CADENA            = \" ~\"
+ERROR_CADENA      = \" 
+OPERADOR          = "+"|"-"|"**"|"*"|"//"|"/"|"%"|"<"|">"|">="|"<="|"="|"!="|"!"|"=="
+LINEA_VACIA       = ([ ] | \t)+\n | "\n"
+SALTO             = \r|\n|\r\n
+COMENTARIO        = #~\n
 
 %%
 {COMENTARIO}         {yybegin(I); num_linea++;}
@@ -150,7 +150,6 @@ COMENTARIO = #~\n
 <<EOF>>{if(!pila.isEmpty()){
             pila.pop();
             return Parser.DEINDENTA;
-        }else{
+        } else {
             return 0;
-        }
-       }
+        }}
