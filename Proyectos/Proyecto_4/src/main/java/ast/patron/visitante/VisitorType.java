@@ -81,7 +81,7 @@ public class VisitorType implements Visitor {
             tipo_der = n.getUltimoHijo().getType();
             nombre_der = n.getUltimoHijo().getNombre();
         }        
-        if (this.estaDeclarada(nombre_der)) {
+        if(this.estaDeclarada(nombre_der)) {
             tipo_der = this.tabla_de_tipos.get(nombre_der);
         }
         if(this.tabla_de_tipos.containsKey(nombre_izq)) {
@@ -376,10 +376,10 @@ public class VisitorType implements Visitor {
     @Override
     public void visit(IfStmts n){
         System.out.println("[if]");
-        for (Iterator i = n.getHijos().iterator(); i.hasNext(); ) {
+        for(Iterator i = n.getHijos().iterator(); i.hasNext(); ) {
             Nodo hijo = (Nodo) i.next();
             System.out.print("[");
-            if ( hijo != null){
+            if( hijo != null){
                 hijo.accept(this);    
             }    
             System.out.println("]");
@@ -397,18 +397,15 @@ public class VisitorType implements Visitor {
             n.getPrimerHijo().accept(this);
             tipo_izq = n.getPrimerHijo().getType();
             nombre_izq = n.getPrimerHijo().getNombre();
-        }    
-        
+        }
         if(estaDeclarada(nombre_izq)) {
             tipo_izq = this.tabla_de_tipos.get(nombre_izq);
         }
-        
         if(n.getUltimoHijo() != null) {
             n.getUltimoHijo().accept(this);
             tipo_der = n.getUltimoHijo().getType();
             nombre_der = n.getUltimoHijo().getNombre();
-        }          
-
+        }
         if(estaDeclarada(nombre_der)) {
             tipo_der = this.tabla_de_tipos.get(nombre_der);
         }
@@ -431,18 +428,15 @@ public class VisitorType implements Visitor {
             n.getPrimerHijo().accept(this);
             tipo_izq = n.getPrimerHijo().getType();
             nombre_izq = n.getPrimerHijo().getNombre();
-        }    
-        
+        }
         if(estaDeclarada(nombre_izq)) {
             tipo_izq = this.tabla_de_tipos.get(nombre_izq);
         }
-        
         if(n.getUltimoHijo() != null) {
             n.getUltimoHijo().accept(this);
             tipo_der = n.getUltimoHijo().getType();
             nombre_der = n.getUltimoHijo().getNombre();
-        }          
-
+        }
         if(estaDeclarada(nombre_der)) {
             tipo_der = this.tabla_de_tipos.get(nombre_der);
         }
@@ -465,18 +459,15 @@ public class VisitorType implements Visitor {
             n.getPrimerHijo().accept(this);
             tipo_izq = n.getPrimerHijo().getType();
             nombre_izq = n.getPrimerHijo().getNombre();
-        }    
-        
+        }
         if(estaDeclarada(nombre_izq)) {
             tipo_izq = this.tabla_de_tipos.get(nombre_izq);
         }
-        
         if(n.getUltimoHijo() != null) {
             n.getUltimoHijo().accept(this);
             tipo_der = n.getUltimoHijo().getType();
             nombre_der = n.getUltimoHijo().getNombre();
-        }          
-
+        }
         if(estaDeclarada(nombre_der)) {
             tipo_der = this.tabla_de_tipos.get(nombre_der);
         }
@@ -499,18 +490,15 @@ public class VisitorType implements Visitor {
             n.getPrimerHijo().accept(this);
             tipo_izq = n.getPrimerHijo().getType();
             nombre_izq = n.getPrimerHijo().getNombre();
-        }    
-        
+        }
         if(estaDeclarada(nombre_izq)) {
             tipo_izq = this.tabla_de_tipos.get(nombre_izq);
         }
-        
         if(n.getUltimoHijo() != null) {
             n.getUltimoHijo().accept(this);
             tipo_der = n.getUltimoHijo().getType();
             nombre_der = n.getUltimoHijo().getNombre();
-        }          
-
+        }
         if(estaDeclarada(nombre_der)) {
             tipo_der = this.tabla_de_tipos.get(nombre_der);
         }
@@ -533,18 +521,15 @@ public class VisitorType implements Visitor {
             n.getPrimerHijo().accept(this);
             tipo_izq = n.getPrimerHijo().getType();
             nombre_izq = n.getPrimerHijo().getNombre();
-        }    
-        
+        }
         if(estaDeclarada(nombre_izq)) {
             tipo_izq = this.tabla_de_tipos.get(nombre_izq);
         }
-        
         if(n.getUltimoHijo() != null) {
             n.getUltimoHijo().accept(this);
             tipo_der = n.getUltimoHijo().getType();
             nombre_der = n.getUltimoHijo().getNombre();
-        }          
-
+        }
         if(estaDeclarada(nombre_der)) {
             tipo_der = this.tabla_de_tipos.get(nombre_der);
         }
@@ -588,10 +573,12 @@ public class VisitorType implements Visitor {
         ;
     }
 
+    @Override
     public void visit(RealHoja n) {
         ;
     }
 
+    @Override
     public void visit(CadenaHoja n) {
         ;
     }
@@ -603,10 +590,9 @@ public class VisitorType implements Visitor {
 
     @Override
     public void visit(Nodo n) {
-        
-        for (Iterator i = n.getHijos().iterator(); i.hasNext(); ) {
+        for(Iterator i = n.getHijos().iterator(); i.hasNext(); ) {
             Nodo hijo = (Nodo) i.next();
-            if (hijo != null) {
+            if(hijo != null) {
                 hijo.accept(this);    
             }    
         }
@@ -615,9 +601,9 @@ public class VisitorType implements Visitor {
     @Override
     public void visit(NodoStmts n) {
         String nombre = "";
-        for (Iterator i = n.getHijos().iterator(); i.hasNext(); ) {
+        for(Iterator i = n.getHijos().iterator(); i.hasNext(); ) {
             Nodo hijo = (Nodo) i.next();
-            if (hijo != null) {
+            if(hijo != null) {
                 hijo.accept(this);    
                 nombre = hijo.getNombre();
             }    
@@ -633,16 +619,13 @@ public class VisitorType implements Visitor {
             n.getPrimerHijo().accept(this);
             tipo_cond = n.getPrimerHijo().getType();
             nombre_izq = n.getPrimerHijo().getNombre();
-        }    
-        
+        }
         if(estaDeclarada(nombre_izq)) {
             tipo_cond = this.tabla_de_tipos.get(nombre_izq);
         }
-        
         if(tipo_cond != 3) {
             ErrorCondicion("'if'");
         }
-        
         if(n.getHijos().getAll().get(1) != null) {
             n.getHijos().getAll().get(1).accept(this);
         }        
@@ -676,12 +659,10 @@ public class VisitorType implements Visitor {
             n.getPrimerHijo().accept(this);
             tipo_cond = n.getPrimerHijo().getType();
             nombre_cond = n.getPrimerHijo().getNombre();
-        }    
-        
+        }
         if(estaDeclarada(nombre_cond)) {
             tipo_cond = this.tabla_de_tipos.get(nombre_cond);
         }
-        
         if(tipo_cond != 3) {
             ErrorCondicion("'while'");
         }  
