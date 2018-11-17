@@ -129,11 +129,11 @@ COMENTARIO = #~\n
 {PALABRA_RESERVADA}  {return reservada(yytext());}
 {IDENTIFICADOR}      {yyparser.yylval = new IdentifierHoja(yytext());
                       return Parser.IDENTIFICADOR;}
-{REAL}               {yyparser.yylval = new FloatHoja(Double.parseDouble(yytext()));
+{REAL}               {yyparser.yylval = new RealHoja(Double.parseDouble(yytext()));
                       return Parser.REAL;}
 {ENTERO}             {yyparser.yylval = new IntHoja(Integer.parseInt(yytext()));
                       return Parser.ENTERO;}
-{CADENA}             {yyparser.yylval = new StringHoja(yytext());
+{CADENA}             {yyparser.yylval = new CadenaHoja(yytext());
                       return Parser.CADENA;}
 {ERROR_CADENA}       {dperr = true;}
 {OPERADOR}           {return operador(yytext());}

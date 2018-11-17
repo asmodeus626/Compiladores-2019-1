@@ -12,20 +12,18 @@ import java.util.Iterator;
 
 /**
  *
- * @author Ernesto Palacios
  */
 public class VisitorType implements Visitor {
-    public Hashtable<String , Integer> tabla_de_tipos;
-    public VisitorType(){
+    public Hashtable<String, Integer> tabla_de_tipos;
+    public VisitorType() {
         tabla_de_tipos = new Hashtable();
-        
     }
     
-    private boolean estaDeclarada(String nombre){
-        if(nombre != null){
-            if(this.tabla_de_tipos.containsKey(nombre)){
+    private boolean estaDeclarada(String nombre) {
+        if(nombre != null) {
+            if(this.tabla_de_tipos.containsKey(nombre)) {
                 return true;
-            }else{
+            } else {
                 System.out.println("Variable " + nombre + " no declarada");
                 System.exit(0);
             }
@@ -33,7 +31,7 @@ public class VisitorType implements Visitor {
         return false;
     }
     
-    private void Incompatibilidad(String operador  , int tipo_izq , int tipo_der){
+    private void Incompatibilidad(String operador, int tipo_izq, int tipo_der) {
         System.out.println("Incompatibilidad de tipos para el operador " + operador + " [" + SistemaDeTipos.getTipo(tipo_izq) + " , " + SistemaDeTipos.getTipo(tipo_der) + "]" );
         System.exit(0);
     }
@@ -45,29 +43,26 @@ public class VisitorType implements Visitor {
         String nombre_izq = "";
         String nombre_der = "";
         int tipo;
-        if(n.getPrimerHijo() != null){           
+        if(n.getPrimerHijo() != null) {           
             n.getPrimerHijo().accept(this);
             tipo_izq = n.getPrimerHijo().getType();
             nombre_izq = n.getPrimerHijo().getNombre();
-        }    
-        
-        if(estaDeclarada(nombre_izq)){
-            tipo_izq = this.tabla_de_tipos.get(nombre_izq);
         }
-        
-        if( n.getUltimoHijo() != null){
+        if(estaDeclarada(nombre_izq)) {
+            tipo_izq = this.tabla_de_tipos.get(nombre_izq);
+        }        
+        if(n.getUltimoHijo() != null) {
             n.getUltimoHijo().accept(this);
             tipo_der = n.getUltimoHijo().getType();
             nombre_der = n.getUltimoHijo().getNombre();
-        }          
-
-        if(estaDeclarada(nombre_der)){
+        }
+        if(estaDeclarada(nombre_der)) {
             tipo_der = this.tabla_de_tipos.get(nombre_der);
         }
         tipo = SistemaDeTipos.SUMA[tipo_der-1][tipo_izq-1];
-        if( tipo != 0){
+        if(tipo != 0) {
              n.setTipo(tipo);
-        }else{
+        } else {
             this.Incompatibilidad("'+'", tipo_izq, tipo_der);
         }
     }
@@ -77,24 +72,24 @@ public class VisitorType implements Visitor {
         String nombre_izq = "";
         String nombre_der = "";
         int tipo_der = 0;
-        if(n.getPrimerHijo() != null){           
+        if(n.getPrimerHijo() != null) {           
             n.getPrimerHijo().accept(this);
             nombre_izq = n.getPrimerHijo().getNombre();
         }        
-        if( n.getUltimoHijo() != null){
+        if(n.getUltimoHijo() != null) {
             n.getUltimoHijo().accept(this);
             tipo_der = n.getUltimoHijo().getType();
             nombre_der = n.getUltimoHijo().getNombre();
         }        
-        if (this.estaDeclarada(nombre_der)){
+        if (this.estaDeclarada(nombre_der)) {
             tipo_der = this.tabla_de_tipos.get(nombre_der);
         }
-        if(this.tabla_de_tipos.containsKey(nombre_izq)){
-            if(tipo_der != tabla_de_tipos.get(nombre_izq)){
+        if(this.tabla_de_tipos.containsKey(nombre_izq)) {
+            if(tipo_der != tabla_de_tipos.get(nombre_izq)) {
                System.out.println("la variable " + nombre_izq + " tiene 2 asignaciones de tipos primero se definio como : " + SistemaDeTipos.getTipo(this.tabla_de_tipos.get(nombre_der)) + " despues como : " + SistemaDeTipos.getTipo(tipo_der));
                System.exit(0);
             }
-        }else{
+        } else {
             this.tabla_de_tipos.put(nombre_izq , tipo_der);
         }
     }
@@ -106,29 +101,26 @@ public class VisitorType implements Visitor {
         String nombre_izq = "";
         String nombre_der = "";
         int tipo;
-        if(n.getPrimerHijo() != null){           
+        if(n.getPrimerHijo() != null) {           
             n.getPrimerHijo().accept(this);
             tipo_izq = n.getPrimerHijo().getType();
             nombre_izq = n.getPrimerHijo().getNombre();
-        }    
-        
-        if(estaDeclarada(nombre_izq)){
+        }
+        if(estaDeclarada(nombre_izq)) {
             tipo_izq = this.tabla_de_tipos.get(nombre_izq);
         }
-        
-        if( n.getUltimoHijo() != null){
+        if(n.getUltimoHijo() != null) {
             n.getUltimoHijo().accept(this);
             tipo_der = n.getUltimoHijo().getType();
             nombre_der = n.getUltimoHijo().getNombre();
-        }          
-
-        if(estaDeclarada(nombre_der)){
+        }
+        if(estaDeclarada(nombre_der)) {
             tipo_der = this.tabla_de_tipos.get(nombre_der);
         }
         tipo = SistemaDeTipos.OPERACIONES_ARITMETICAS[tipo_der-1][tipo_izq-1];
-        if( tipo != 0){
+        if(tipo != 0) {
              n.setTipo(tipo);
-        }else{
+        } else {
             this.Incompatibilidad("'-'", tipo_izq, tipo_der);
         }
     }
@@ -140,29 +132,26 @@ public class VisitorType implements Visitor {
         String nombre_izq = "";
         String nombre_der = "";
         int tipo;
-        if(n.getPrimerHijo() != null){           
+        if(n.getPrimerHijo() != null) {           
             n.getPrimerHijo().accept(this);
             tipo_izq = n.getPrimerHijo().getType();
             nombre_izq = n.getPrimerHijo().getNombre();
-        }    
-        
-        if(estaDeclarada(nombre_izq)){
+        }        
+        if(estaDeclarada(nombre_izq)) {
             tipo_izq = this.tabla_de_tipos.get(nombre_izq);
         }
-        
-        if( n.getUltimoHijo() != null){
+        if(n.getUltimoHijo() != null) {
             n.getUltimoHijo().accept(this);
             tipo_der = n.getUltimoHijo().getType();
             nombre_der = n.getUltimoHijo().getNombre();
-        }          
-
-        if(estaDeclarada(nombre_der)){
+        }
+        if(estaDeclarada(nombre_der)) {
             tipo_der = this.tabla_de_tipos.get(nombre_der);
         }
         tipo = SistemaDeTipos.OPERACIONES_ARITMETICAS[tipo_der-1][tipo_izq-1];
-        if( tipo != 0){
+        if(tipo != 0) {
              n.setTipo(tipo);
-        }else{
+        } else {
             this.Incompatibilidad("'/'", tipo_izq, tipo_der);
         }
     }
@@ -174,29 +163,26 @@ public class VisitorType implements Visitor {
         String nombre_izq = "";
         String nombre_der = "";
         int tipo;
-        if(n.getPrimerHijo() != null){           
+        if(n.getPrimerHijo() != null) {      
             n.getPrimerHijo().accept(this);
             tipo_izq = n.getPrimerHijo().getType();
             nombre_izq = n.getPrimerHijo().getNombre();
-        }    
-        
-        if(estaDeclarada(nombre_izq)){
-            tipo_izq = this.tabla_de_tipos.get(nombre_izq);
         }
-        
-        if( n.getUltimoHijo() != null){
+        if(estaDeclarada(nombre_izq)) {
+            tipo_izq = this.tabla_de_tipos.get(nombre_izq);
+        }        
+        if(n.getUltimoHijo() != null) {
             n.getUltimoHijo().accept(this);
             tipo_der = n.getUltimoHijo().getType();
             nombre_der = n.getUltimoHijo().getNombre();
-        }          
-
-        if(estaDeclarada(nombre_der)){
+        }
+        if(estaDeclarada(nombre_der)) {
             tipo_der = this.tabla_de_tipos.get(nombre_der);
         }
         tipo = SistemaDeTipos.OPERACIONES_ARITMETICAS[tipo_der-1][tipo_izq-1];
-        if( tipo != 0){
+        if(tipo != 0) {
              n.setTipo(tipo);
-        }else{
+        } else {
             this.Incompatibilidad("'//'", tipo_izq, tipo_der);
         }
     }
@@ -208,29 +194,26 @@ public class VisitorType implements Visitor {
         String nombre_izq = "";
         String nombre_der = "";
         int tipo;
-        if(n.getPrimerHijo() != null){           
+        if(n.getPrimerHijo() != null) {           
             n.getPrimerHijo().accept(this);
             tipo_izq = n.getPrimerHijo().getType();
             nombre_izq = n.getPrimerHijo().getNombre();
-        }    
-        
-        if(estaDeclarada(nombre_izq)){
+        }
+        if(estaDeclarada(nombre_izq)) {
             tipo_izq = this.tabla_de_tipos.get(nombre_izq);
         }
-        
-        if( n.getUltimoHijo() != null){
+        if(n.getUltimoHijo() != null) {
             n.getUltimoHijo().accept(this);
             tipo_der = n.getUltimoHijo().getType();
             nombre_der = n.getUltimoHijo().getNombre();
-        }          
-
-        if(estaDeclarada(nombre_der)){
+        }
+        if(estaDeclarada(nombre_der)) {
             tipo_der = this.tabla_de_tipos.get(nombre_der);
         }
         tipo = SistemaDeTipos.OPERACIONES_ARITMETICAS[tipo_der-1][tipo_izq-1];
-        if( tipo != 0){
+        if(tipo != 0) {
              n.setTipo(tipo);
-        }else{
+        } else {
             this.Incompatibilidad("'%'", tipo_izq, tipo_der);
         }
     }
@@ -242,29 +225,26 @@ public class VisitorType implements Visitor {
         String nombre_izq = "";
         String nombre_der = "";
         int tipo;
-        if(n.getPrimerHijo() != null){           
+        if(n.getPrimerHijo() != null) {
             n.getPrimerHijo().accept(this);
             tipo_izq = n.getPrimerHijo().getType();
             nombre_izq = n.getPrimerHijo().getNombre();
-        }    
-        
-        if(estaDeclarada(nombre_izq)){
+        }
+        if(estaDeclarada(nombre_izq)) {
             tipo_izq = this.tabla_de_tipos.get(nombre_izq);
         }
-        
-        if( n.getUltimoHijo() != null){
+        if(n.getUltimoHijo() != null) {
             n.getUltimoHijo().accept(this);
             tipo_der = n.getUltimoHijo().getType();
             nombre_der = n.getUltimoHijo().getNombre();
         }          
-
-        if(estaDeclarada(nombre_der)){
+        if(estaDeclarada(nombre_der)) {
             tipo_der = this.tabla_de_tipos.get(nombre_der);
         }
         tipo = SistemaDeTipos.OPERACIONES_ARITMETICAS[tipo_der-1][tipo_izq-1];
-        if( tipo != 0){
+        if(tipo != 0) {
              n.setTipo(tipo);
-        }else{
+        } else {
             this.Incompatibilidad("'*'", tipo_izq, tipo_der);
         }
     }
@@ -276,29 +256,26 @@ public class VisitorType implements Visitor {
         String nombre_izq = "";
         String nombre_der = "";
         int tipo;
-        if(n.getPrimerHijo() != null){           
+        if(n.getPrimerHijo() != null) {           
             n.getPrimerHijo().accept(this);
             tipo_izq = n.getPrimerHijo().getType();
             nombre_izq = n.getPrimerHijo().getNombre();
-        }    
-        
-        if(estaDeclarada(nombre_izq)){
+        }
+        if(estaDeclarada(nombre_izq)) {
             tipo_izq = this.tabla_de_tipos.get(nombre_izq);
         }
-        
-        if( n.getUltimoHijo() != null){
+        if(n.getUltimoHijo() != null) {
             n.getUltimoHijo().accept(this);
             tipo_der = n.getUltimoHijo().getType();
             nombre_der = n.getUltimoHijo().getNombre();
-        }          
-
-        if(estaDeclarada(nombre_der)){
+        }
+        if(estaDeclarada(nombre_der)) {
             tipo_der = this.tabla_de_tipos.get(nombre_der);
         }
         tipo = SistemaDeTipos.OPERACIONES_ARITMETICAS[tipo_der-1][tipo_izq-1];
-        if( tipo != 0){
+        if(tipo != 0) {
              n.setTipo(tipo);
-        }else{
+        } else {
             this.Incompatibilidad("'**'", tipo_izq, tipo_der);
         }
     }
@@ -310,29 +287,26 @@ public class VisitorType implements Visitor {
         String nombre_izq = "";
         String nombre_der = "";
         int tipo;
-        if(n.getPrimerHijo() != null){           
+        if(n.getPrimerHijo() != null) {         
             n.getPrimerHijo().accept(this);
             tipo_izq = n.getPrimerHijo().getType();
             nombre_izq = n.getPrimerHijo().getNombre();
-        }    
-        
-        if(estaDeclarada(nombre_izq)){
+        }
+        if(estaDeclarada(nombre_izq)) {
             tipo_izq = this.tabla_de_tipos.get(nombre_izq);
         }
-        
-        if( n.getUltimoHijo() != null){
+        if(n.getUltimoHijo() != null) {
             n.getUltimoHijo().accept(this);
             tipo_der = n.getUltimoHijo().getType();
             nombre_der = n.getUltimoHijo().getNombre();
-        }          
-
-        if(estaDeclarada(nombre_der)){
+        }
+        if(estaDeclarada(nombre_der)) {
             tipo_der = this.tabla_de_tipos.get(nombre_der);
         }
         tipo = SistemaDeTipos.OPERACIONES_BOOLEANAS[tipo_der-1][tipo_izq-1];
-        if( tipo != 0){
+        if(tipo != 0) {
              n.setTipo(tipo);
-        }else{
+        } else {
             this.Incompatibilidad("'and'", tipo_izq, tipo_der);
         }
     }
@@ -344,29 +318,26 @@ public class VisitorType implements Visitor {
         String nombre_izq = "";
         String nombre_der = "";
         int tipo;
-        if(n.getPrimerHijo() != null){           
+        if(n.getPrimerHijo() != null) {
             n.getPrimerHijo().accept(this);
             tipo_izq = n.getPrimerHijo().getType();
             nombre_izq = n.getPrimerHijo().getNombre();
-        }    
-        
-        if(estaDeclarada(nombre_izq)){
+        }
+        if(estaDeclarada(nombre_izq)) {
             tipo_izq = this.tabla_de_tipos.get(nombre_izq);
         }
-        
-        if( n.getUltimoHijo() != null){
+        if(n.getUltimoHijo() != null) {
             n.getUltimoHijo().accept(this);
             tipo_der = n.getUltimoHijo().getType();
             nombre_der = n.getUltimoHijo().getNombre();
-        }          
-
-        if(estaDeclarada(nombre_der)){
+        }
+        if(estaDeclarada(nombre_der)) {
             tipo_der = this.tabla_de_tipos.get(nombre_der);
         }
         tipo = SistemaDeTipos.OPERACIONES_BOOLEANAS[tipo_der-1][tipo_izq-1];
-        if( tipo != 0){
+        if(tipo != 0) {
              n.setTipo(tipo);
-        }else{
+        } else {
             this.Incompatibilidad("'or'", tipo_izq, tipo_der);
         }
     }
@@ -378,30 +349,40 @@ public class VisitorType implements Visitor {
         String nombre_izq = "";
         String nombre_der = "";
         int tipo;
-        if(n.getPrimerHijo() != null){           
+        if(n.getPrimerHijo() != null) {           
             n.getPrimerHijo().accept(this);
             tipo_izq = n.getPrimerHijo().getType();
             nombre_izq = n.getPrimerHijo().getNombre();
-        }    
-        
-        if(estaDeclarada(nombre_izq)){
+        }
+        if(estaDeclarada(nombre_izq)) {
             tipo_izq = this.tabla_de_tipos.get(nombre_izq);
         }
-        
-        if( n.getUltimoHijo() != null){
+        if(n.getUltimoHijo() != null) {
             n.getUltimoHijo().accept(this);
             tipo_der = n.getUltimoHijo().getType();
             nombre_der = n.getUltimoHijo().getNombre();
-        }          
-
-        if(estaDeclarada(nombre_der)){
+        }
+        if(estaDeclarada(nombre_der)) {
             tipo_der = this.tabla_de_tipos.get(nombre_der);
         }
         tipo = SistemaDeTipos.OPERACIONES_BOOLEANAS[tipo_der-1][tipo_izq-1];
-        if( tipo != 0){
+        if(tipo != 0) {
              n.setTipo(tipo);
-        }else{
+        } else {
             this.Incompatibilidad("'!='", tipo_izq, tipo_der);
+        }
+    }
+
+    @Override
+    public void visit(IfStmts n){
+        System.out.println("[if]");
+        for (Iterator i = n.getHijos().iterator(); i.hasNext(); ) {
+            Nodo hijo = (Nodo) i.next();
+            System.out.print("[");
+            if ( hijo != null){
+                hijo.accept(this);    
+            }    
+            System.out.println("]");
         }
     }
 
@@ -412,29 +393,29 @@ public class VisitorType implements Visitor {
         String nombre_izq = "";
         String nombre_der = "";
         int tipo;
-        if(n.getPrimerHijo() != null){           
+        if(n.getPrimerHijo() != null) {           
             n.getPrimerHijo().accept(this);
             tipo_izq = n.getPrimerHijo().getType();
             nombre_izq = n.getPrimerHijo().getNombre();
         }    
         
-        if(estaDeclarada(nombre_izq)){
+        if(estaDeclarada(nombre_izq)) {
             tipo_izq = this.tabla_de_tipos.get(nombre_izq);
         }
         
-        if( n.getUltimoHijo() != null){
+        if(n.getUltimoHijo() != null) {
             n.getUltimoHijo().accept(this);
             tipo_der = n.getUltimoHijo().getType();
             nombre_der = n.getUltimoHijo().getNombre();
         }          
 
-        if(estaDeclarada(nombre_der)){
+        if(estaDeclarada(nombre_der)) {
             tipo_der = this.tabla_de_tipos.get(nombre_der);
         }
         tipo = SistemaDeTipos.OPERACIONES_BOOLEANAS[tipo_der-1][tipo_izq-1];
-        if( tipo != 0){
+        if(tipo != 0) {
              n.setTipo(tipo);
-        }else{
+        } else {
             this.Incompatibilidad("'=='", tipo_izq, tipo_der);
         }
     }
@@ -446,29 +427,29 @@ public class VisitorType implements Visitor {
         String nombre_izq = "";
         String nombre_der = "";
         int tipo;
-        if(n.getPrimerHijo() != null){           
+        if(n.getPrimerHijo() != null) {           
             n.getPrimerHijo().accept(this);
             tipo_izq = n.getPrimerHijo().getType();
             nombre_izq = n.getPrimerHijo().getNombre();
         }    
         
-        if(estaDeclarada(nombre_izq)){
+        if(estaDeclarada(nombre_izq)) {
             tipo_izq = this.tabla_de_tipos.get(nombre_izq);
         }
         
-        if( n.getUltimoHijo() != null){
+        if(n.getUltimoHijo() != null) {
             n.getUltimoHijo().accept(this);
             tipo_der = n.getUltimoHijo().getType();
             nombre_der = n.getUltimoHijo().getNombre();
         }          
 
-        if(estaDeclarada(nombre_der)){
+        if(estaDeclarada(nombre_der)) {
             tipo_der = this.tabla_de_tipos.get(nombre_der);
         }
         tipo = SistemaDeTipos.OPERACIONES_BOOLEANAS[tipo_der-1][tipo_izq-1];
-        if( tipo != 0){
+        if(tipo != 0) {
              n.setTipo(tipo);
-        }else{
+        } else {
             this.Incompatibilidad("'<='", tipo_izq, tipo_der);
         }
     }
@@ -480,29 +461,29 @@ public class VisitorType implements Visitor {
         String nombre_izq = "";
         String nombre_der = "";
         int tipo;
-        if(n.getPrimerHijo() != null){           
+        if(n.getPrimerHijo() != null) {           
             n.getPrimerHijo().accept(this);
             tipo_izq = n.getPrimerHijo().getType();
             nombre_izq = n.getPrimerHijo().getNombre();
         }    
         
-        if(estaDeclarada(nombre_izq)){
+        if(estaDeclarada(nombre_izq)) {
             tipo_izq = this.tabla_de_tipos.get(nombre_izq);
         }
         
-        if( n.getUltimoHijo() != null){
+        if(n.getUltimoHijo() != null) {
             n.getUltimoHijo().accept(this);
             tipo_der = n.getUltimoHijo().getType();
             nombre_der = n.getUltimoHijo().getNombre();
         }          
 
-        if(estaDeclarada(nombre_der)){
+        if(estaDeclarada(nombre_der)) {
             tipo_der = this.tabla_de_tipos.get(nombre_der);
         }
         tipo = SistemaDeTipos.OPERACIONES_BOOLEANAS[tipo_der-1][tipo_izq-1];
-        if( tipo != 0){
+        if(tipo != 0) {
              n.setTipo(tipo);
-        }else{
+        } else {
             this.Incompatibilidad("'>='", tipo_izq, tipo_der);
         }
     }
@@ -514,29 +495,29 @@ public class VisitorType implements Visitor {
         String nombre_izq = "";
         String nombre_der = "";
         int tipo;
-        if(n.getPrimerHijo() != null){           
+        if(n.getPrimerHijo() != null) {           
             n.getPrimerHijo().accept(this);
             tipo_izq = n.getPrimerHijo().getType();
             nombre_izq = n.getPrimerHijo().getNombre();
         }    
         
-        if(estaDeclarada(nombre_izq)){
+        if(estaDeclarada(nombre_izq)) {
             tipo_izq = this.tabla_de_tipos.get(nombre_izq);
         }
         
-        if( n.getUltimoHijo() != null){
+        if(n.getUltimoHijo() != null) {
             n.getUltimoHijo().accept(this);
             tipo_der = n.getUltimoHijo().getType();
             nombre_der = n.getUltimoHijo().getNombre();
         }          
 
-        if(estaDeclarada(nombre_der)){
+        if(estaDeclarada(nombre_der)) {
             tipo_der = this.tabla_de_tipos.get(nombre_der);
         }
         tipo = SistemaDeTipos.OPERACIONES_BOOLEANAS[tipo_der-1][tipo_izq-1];
-        if( tipo != 0){
+        if(tipo != 0) {
              n.setTipo(tipo);
-        }else{
+        } else {
             this.Incompatibilidad("'<'", tipo_izq, tipo_der);
         }
     }
@@ -548,29 +529,29 @@ public class VisitorType implements Visitor {
         String nombre_izq = "";
         String nombre_der = "";
         int tipo;
-        if(n.getPrimerHijo() != null){           
+        if(n.getPrimerHijo() != null) {           
             n.getPrimerHijo().accept(this);
             tipo_izq = n.getPrimerHijo().getType();
             nombre_izq = n.getPrimerHijo().getNombre();
         }    
         
-        if(estaDeclarada(nombre_izq)){
+        if(estaDeclarada(nombre_izq)) {
             tipo_izq = this.tabla_de_tipos.get(nombre_izq);
         }
         
-        if( n.getUltimoHijo() != null){
+        if(n.getUltimoHijo() != null) {
             n.getUltimoHijo().accept(this);
             tipo_der = n.getUltimoHijo().getType();
             nombre_der = n.getUltimoHijo().getNombre();
         }          
 
-        if(estaDeclarada(nombre_der)){
+        if(estaDeclarada(nombre_der)) {
             tipo_der = this.tabla_de_tipos.get(nombre_der);
         }
         tipo = SistemaDeTipos.OPERACIONES_BOOLEANAS[tipo_der-1][tipo_izq-1];
-        if( tipo != 0){
+        if(tipo != 0) {
              n.setTipo(tipo);
-        }else{
+        } else {
             this.Incompatibilidad("'>'", tipo_izq, tipo_der);
         }
     }
@@ -579,20 +560,20 @@ public class VisitorType implements Visitor {
     public void visit(NotNodo n) {
         int tipo= 0;
         String nombre = "";
-        if(n.getPrimerHijo() != null){           
+        if(n.getPrimerHijo() != null) {           
             n.getPrimerHijo().accept(this);
             tipo = n.getPrimerHijo().getType();
             nombre = n.getPrimerHijo().getNombre();
         }             
         
-        if(estaDeclarada(nombre)){
+        if(estaDeclarada(nombre)) {
             tipo = this.tabla_de_tipos.get(nombre);
         }
         
         tipo = SistemaDeTipos.NOT[tipo-1];
-        if( tipo != 0){
+        if(tipo != 0) {
              n.setTipo(tipo);
-        }else{
+        } else {
             System.out.println("Incompatibilidad de tipos para el operador 'not' " + "[" + SistemaDeTipos.getTipo(tipo) + "]" );
             System.exit(0);
         }
@@ -607,12 +588,10 @@ public class VisitorType implements Visitor {
         ;
     }
 
-    @Override
     public void visit(RealHoja n) {
         ;
     }
 
-    @Override
     public void visit(CadenaHoja n) {
         ;
     }
@@ -627,7 +606,7 @@ public class VisitorType implements Visitor {
         
         for (Iterator i = n.getHijos().iterator(); i.hasNext(); ) {
             Nodo hijo = (Nodo) i.next();
-            if ( hijo != null){
+            if (hijo != null) {
                 hijo.accept(this);    
             }    
         }
@@ -638,7 +617,7 @@ public class VisitorType implements Visitor {
         String nombre = "";
         for (Iterator i = n.getHijos().iterator(); i.hasNext(); ) {
             Nodo hijo = (Nodo) i.next();
-            if ( hijo != null){
+            if (hijo != null) {
                 hijo.accept(this);    
                 nombre = hijo.getNombre();
             }    
@@ -650,25 +629,25 @@ public class VisitorType implements Visitor {
     public void visit(IfNodo n) {
         int tipo_cond = 0;        
         String nombre_izq = "";
-        if(n.getPrimerHijo() != null){           
+        if(n.getPrimerHijo() != null) {           
             n.getPrimerHijo().accept(this);
             tipo_cond = n.getPrimerHijo().getType();
             nombre_izq = n.getPrimerHijo().getNombre();
         }    
         
-        if(estaDeclarada(nombre_izq)){
+        if(estaDeclarada(nombre_izq)) {
             tipo_cond = this.tabla_de_tipos.get(nombre_izq);
         }
         
-        if(tipo_cond != 3){
+        if(tipo_cond != 3) {
             ErrorCondicion("'if'");
         }
         
-        if( n.getHijos().getAll().get(1) != null){
+        if(n.getHijos().getAll().get(1) != null) {
             n.getHijos().getAll().get(1).accept(this);
         }        
-        if(n.getHijos().size() == 3){
-            if( n.getHijos().getAll().get(2) != null){
+        if(n.getHijos().size() == 3) {
+            if(n.getHijos().getAll().get(2) != null) {
                 n.getHijos().getAll().get(2).accept(this);
             } 
         }       
@@ -682,7 +661,7 @@ public class VisitorType implements Visitor {
     @Override
     public void visit(NodoPrint n) {
         String nombre = "";
-        if(n.getPrimerHijo() != null){
+        if(n.getPrimerHijo() != null) {
             n.getPrimerHijo().accept(this);
             nombre = n.getPrimerHijo().getNombre();
         }    
@@ -693,20 +672,20 @@ public class VisitorType implements Visitor {
     public void visit(WhileNodo n) {
         int tipo_cond = 0;
         String nombre_cond = "";
-        if(n.getPrimerHijo() != null){           
+        if(n.getPrimerHijo() != null) {           
             n.getPrimerHijo().accept(this);
             tipo_cond = n.getPrimerHijo().getType();
             nombre_cond = n.getPrimerHijo().getNombre();
         }    
         
-        if(estaDeclarada(nombre_cond)){
+        if(estaDeclarada(nombre_cond)) {
             tipo_cond = this.tabla_de_tipos.get(nombre_cond);
         }
         
-        if(tipo_cond != 3){
+        if(tipo_cond != 3) {
             ErrorCondicion("'while'");
         }  
-        if( n.getUltimoHijo() != null){
+        if(n.getUltimoHijo() != null) {
             n.getUltimoHijo().accept(this);
         }       
     }  

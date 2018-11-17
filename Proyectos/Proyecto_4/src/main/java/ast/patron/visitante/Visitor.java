@@ -27,8 +27,8 @@ public interface Visitor
     //Hojas
     public void visit(IdentifierHoja n);
     public void visit(IntHoja n);
-    public void visit(FloatHoja n);
-    public void visit(StringHoja n);
+    public void visit(RealHoja n);
+    public void visit(CadenaHoja n);
     public void visit(BooleanHoja n);
     
     public void visit(Nodo n);
