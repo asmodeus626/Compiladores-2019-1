@@ -2,3 +2,16 @@
 /Proyectos/Proyecto_1/target/
 /Practicas/Practica3/target/
 /Proyectos/Proyecto_3/target/
+*.autosave
+*.class
+*.jar
+*.pdf
+*.aux
+*.log
+*.out
+*.gz
+# Ignore auto generated files
+*classpath
+*.project
+*settings
+target/
