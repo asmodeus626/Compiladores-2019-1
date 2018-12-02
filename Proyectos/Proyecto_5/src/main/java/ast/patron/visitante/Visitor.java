@@ -1,8 +1,8 @@
 package ast.patron.visitante;
 import ast.patron.compuesto.*;
 
-public interface Visitor
-{   
+public interface Visitor {
+
     //Aritmeticas
     public void visit(AddNodo n);
     public void visit(AsigNodo n);
