@@ -7,16 +7,16 @@ package ast.patron.visitante;
 
 import ast.patron.compuesto.*;
 import ast.patron.sistema_de_tipos.SistemaDeTipos;
-import java.util.Hashtable;
+import java.util.HashMap;
 import java.util.Iterator;
 
 /**
  *
  */
 public class VisitorType implements Visitor {
-    public Hashtable<String, Integer> tabla_de_tipos;
+    public HashMap<String, Integer> tabla_de_tipos;
     public VisitorType() {
-        tabla_de_tipos = new Hashtable();
+        tabla_de_tipos = new HashMap();
     }
     
     private boolean estaDeclarada(String nombre) {

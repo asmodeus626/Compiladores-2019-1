@@ -35,7 +35,7 @@ public class SistemaDeTipos {
             case 1: return "Entero";
             case 2: return "Real";
             case 3: return "Booleano";
-            case 4: return "Cadema";
+            case 4: return "Cadena";
             default: return "Tipo no encontrado";
         }
     }

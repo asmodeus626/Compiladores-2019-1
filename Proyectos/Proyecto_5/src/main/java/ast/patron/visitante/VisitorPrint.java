@@ -17,6 +17,7 @@ public class VisitorPrint implements Visitor {
         }          
         System.out.println("]");
     }
+    
     public void visit(AsigNodo n) {
         System.out.println("[=]");
         System.out.print("[");
