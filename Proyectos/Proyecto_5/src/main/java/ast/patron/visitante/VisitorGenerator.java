@@ -12,6 +12,7 @@ import java.util.Set;
 
 public class VisitorGenerator implements Visitor {
     Registros reg = new Registros();
+    public String salida = "";
 
     @Override
     public void visit(DifNodo n) {
@@ -65,18 +66,28 @@ public class VisitorGenerator implements Visitor {
     public void visit(AsigNodo n) {
         Nodo hi = n.getPrimerHijo();
         Nodo hd = n.getUltimoHijo();
-        
+
+        String nombre;
+        // Tipo del registro objetivo.
+        int tipo = n.getType();
         // Obtenemos el tipo del registro objetivo.
         boolean entero = n.getType() != 2;
 
         String objetivo = reg.getObjetivo(entero);
-        String[] siguientes = reg.getNSiguientes(2,entero);
+        String[] siguientes = reg.getNSiguientes(2, entero);
+        
         System.out.print("li "+objetivo+",");
-        
         hd.accept(this);
-        
+        tipo = hd.getType();
+
         System.out.print("\nsw "+objetivo+",");
         hi.accept(this);
+        nombre = hi.getNombre();
+        
+        if(nombre != null && tipo == 1) {
+            String opcode = "sw";
+            salida += opcode+" "+siguientes[1]+ ", "+nombre+"\n";
+        }
     }
 
     @Override

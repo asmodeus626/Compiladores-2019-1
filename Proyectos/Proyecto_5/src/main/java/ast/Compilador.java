@@ -9,12 +9,14 @@ public class Compilador {
     Parser parser;
     Nodo raízAST;
     VisitorPrint v_print;
+    VisitorGenerator v_generate;
     VisitorType v_type;
 
     Compilador(Reader fuente) {
         parser  = new Parser(fuente);
         v_print = new VisitorPrint();
         v_type  = new VisitorType();
+        v_generate = new VisitorGenerator();
     }
 
     public void ConstruyeAST(boolean debug) {
@@ -31,6 +33,10 @@ public class Compilador {
         parser.raiz.accept(v_type);
     }
 
+    private void genera() {
+        parser.raiz.accept(v_generate);
+    }
+
     public static void main(String[] args) {
             String archivo = "src/main/resources/test.txt";
         try{
@@ -39,6 +45,7 @@ public class Compilador {
             c.ConstruyeAST(true);
             c.imprimeAST();
             c.verificaTiposAST();
+            //c.genera();
         }catch(FileNotFoundException e) {
             System.err.println("El archivo " + archivo +" no fue encontrado. ");
         }catch(ArrayIndexOutOfBoundsException e) {

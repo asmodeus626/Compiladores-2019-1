@@ -55,6 +55,7 @@ public class Registros {
      * Recupera los n registros siguientes que pueden ser usados de manera 
      * auxiliar para llevar a cabo los cálculos, es decir "disponibles".
      * @param n
+     * @param entero
      * @return siguientes
      */
     public String[] getNSiguientes(int n, boolean entero) {
