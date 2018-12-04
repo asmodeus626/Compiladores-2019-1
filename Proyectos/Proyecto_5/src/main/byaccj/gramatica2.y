@@ -138,7 +138,7 @@ atom : IDENTIFICADOR {$$ = $1;}
 
   public static void main(String args[]) throws IOException {
     Parser yyparser;
-    yyparser = new Parser(new FileReader("src/main/resources/test.txt"));
+    yyparser = new Parser(new FileReader("src/main/resources/test.p"));
     yyparser.yydebug = false; //true para que imprima el proceso.
     int condicion = yyparser.yyparse();
 
