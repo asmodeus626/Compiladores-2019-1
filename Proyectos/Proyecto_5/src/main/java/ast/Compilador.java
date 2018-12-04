@@ -45,6 +45,7 @@ public class Compilador {
             c.ConstruyeAST(true);
             c.imprimeAST();
             c.verificaTiposAST();
+            /* TODO: Ver que onda con la generacion de codigo */ 
             //c.genera();
         }catch(FileNotFoundException e) {
             System.err.println("El archivo " + archivo +" no fue encontrado. ");

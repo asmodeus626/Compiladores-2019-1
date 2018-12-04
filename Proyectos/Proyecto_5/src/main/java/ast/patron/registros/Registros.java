@@ -5,7 +5,6 @@ import java.util.Arrays;
 /**
  * Clase para facilitar la asignación de registros, que abstrae el manejo de 
  * los registros.
- * @author rodd
  */
 public class Registros {
 

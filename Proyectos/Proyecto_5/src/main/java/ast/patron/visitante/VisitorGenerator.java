@@ -1,13 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package ast.patron.visitante;
 
 import ast.patron.compuesto.*;
 import ast.patron.registros.Registros;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Set;
 
 public class VisitorGenerator implements Visitor {
@@ -16,8 +12,8 @@ public class VisitorGenerator implements Visitor {
 
     @Override
     public void visit(DifNodo n) {
-        Nodo hi = n.getPrimerHijo();
-        Nodo hd = n.getUltimoHijo();
+        Nodo hijoIzquierdo = n.getPrimerHijo();
+        Nodo hijoDerecho = n.getUltimoHijo();
 
         // Obtenemos el tipo del registro objetivo.
         boolean entero = n.getType() != 2;
@@ -27,11 +23,11 @@ public class VisitorGenerator implements Visitor {
 
         // Genero el código del subárbol izquierdo.
         reg.setObjetivo(siguientes[0]);
-        hi.accept(this);
+        hijoIzquierdo.accept(this);
 
         // Genero el código del subárbol derecho
         reg.setObjetivo(siguientes[1]);
-        hd.accept(this);
+        hijoDerecho.accept(this);
 
         String opcode = "sub";
 
@@ -40,8 +36,8 @@ public class VisitorGenerator implements Visitor {
 
     @Override
     public void visit(AddNodo n) {
-        Nodo hi = n.getPrimerHijo();
-        Nodo hd = n.getUltimoHijo();
+        Nodo hijoIzquierdo = n.getPrimerHijo();
+        Nodo hijoDerecho = n.getUltimoHijo();
 
         // Obtenemos el tipo del registro objetivo.
         boolean entero = n.getType() != 2;
@@ -51,11 +47,11 @@ public class VisitorGenerator implements Visitor {
 
         // Genero el código del subárbol izquierdo.
         reg.setObjetivo(siguientes[0]);
-        hi.accept(this);
+        hijoIzquierdo.accept(this);
 
         // Genero el código del subárbol derecho
         reg.setObjetivo(siguientes[1]);
-        hd.accept(this);
+        hijoDerecho.accept(this);
 
         String opcode = "add";
 
@@ -64,25 +60,23 @@ public class VisitorGenerator implements Visitor {
 
     @Override
     public void visit(AsigNodo n) {
-        Nodo hi = n.getPrimerHijo();
-        Nodo hd = n.getUltimoHijo();
+        Nodo hijoIzquierdo = n.getPrimerHijo();
+        Nodo hijoDerecho = n.getUltimoHijo();
 
         String nombre;
         // Tipo del registro objetivo.
-        int tipo = n.getType();
-        // Obtenemos el tipo del registro objetivo.
         boolean entero = n.getType() != 2;
 
         String objetivo = reg.getObjetivo(entero);
         String[] siguientes = reg.getNSiguientes(2, entero);
         
         System.out.print("li "+objetivo+",");
-        hd.accept(this);
-        tipo = hd.getType();
+        hijoDerecho.accept(this);
+        int tipo = hijoDerecho.getType();
 
         System.out.print("\nsw "+objetivo+",");
-        hi.accept(this);
-        nombre = hi.getNombre();
+        hijoIzquierdo.accept(this);
+        nombre = hijoIzquierdo.getNombre();
         
         if(nombre != null && tipo == 1) {
             String opcode = "sw";
@@ -92,72 +86,134 @@ public class VisitorGenerator implements Visitor {
 
     @Override
     public void visit(DivNodo n) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
     public void visit(DivisionEnteraNodo n) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Nodo hi = n.getPrimerHijo();
+        Nodo hd = n.getUltimoHijo();
+
+        // Registro objetivo
+        int tipo = n.getType();
+        boolean entero =  tipo!=2;
+
+        String objetivo = reg.getObjetivo(entero);
+        String[] siguientes = reg.getNSiguientes(2,entero);
+
+        // Subárbol izquierdo
+        reg.setObjetivo(siguientes[0]);
+        hi.accept(this);
+        String nombre = hi.getNombre();
+        if(nombre != null){
+           salida += "lw " + siguientes[0] + ", " + nombre + "\n";
+        }
+
+        // Subárbol derecho
+        reg.setObjetivo(siguientes[1]);
+        hd.accept(this);
+        nombre = hd.getNombre();
+        if(nombre != null){
+           salida += "lw " + siguientes[1] + ", " + nombre + "\n";
+        }
+
+        String opcode =  tipo==2 ? "div.s" : "div";
+
+        salida += opcode  + " " +
+                            siguientes[0] + ", " + siguientes[1] + "\n";
+        
+        salida += "mflo " + objetivo + "\n";
     }
 
     @Override
     public void visit(ModuloNodo n) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
     public void visit(PorNodo n) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Nodo hijoIzquierdo = n.getPrimerHijo();
+        Nodo hijoDerecho = n.getUltimoHijo();
+
+        // Tipo de registro objetivo
+        int tipo = n.getType();
+        boolean entero =  tipo!=2;
+
+        String objetivo = reg.getObjetivo(entero);
+        String[] siguientes = reg.getNSiguientes(2,entero);
+        
+        // Genero el código del subárbol izquiero
+        reg.setObjetivo(siguientes[0]);
+        hijoIzquierdo.accept(this);
+        String nombre = hijoIzquierdo.getNombre();
+        if(nombre != null){
+           salida += "lw " + siguientes[0] + ", " + nombre + "\n";
+        }
+
+        // Genero el código del subárbol derecho
+        reg.setObjetivo(siguientes[1]);
+        hijoDerecho.accept(this);
+        nombre = hijoDerecho.getNombre();
+        if(nombre != null){
+           salida += "lw " + siguientes[1] + ", " + nombre + "\n";
+        }
+
+        String opcode =  tipo==2 ? "mult.s" : "mult" ;
+
+        salida += opcode  + " " +
+                            siguientes[0] + ", " + siguientes[1] + "\n"; 
+        
+        salida +="mflo " + objetivo + "\n";
     }
 
     @Override
     public void visit(PowNodo n) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
     public void visit(AndNodo n) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
     public void visit(OrNodo n) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
     public void visit(DiferenteNodo n) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
     public void visit(IgualIgualNodo n) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
     public void visit(MenorIgualNodo n) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
     public void visit(MayorIgualNodo n) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
     public void visit(MenorNodo n) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
     public void visit(MayorNodo n) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
     public void visit(NotNodo n) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
@@ -167,7 +223,8 @@ public class VisitorGenerator implements Visitor {
 
     @Override
     public void visit(IntHoja n) {
-        System.out.print(n.getValor().ival);
+        String[] siguientes = reg.getNSiguientes(1, true);
+        salida += "li ," + siguientes[0] + " , " + n.getValor().ival + "\n";
     }
 
     @Override
@@ -192,32 +249,73 @@ public class VisitorGenerator implements Visitor {
 
     @Override
     public void visit(Nodo n) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        for (Iterator i = n.getHijos().iterator(); i.hasNext();) {
+            Nodo hijo = (Nodo) i.next();
+            if( hijo != null) {
+                hijo.accept(this);    
+            }    
+        }
     }
 
     @Override
     public void visit(NodoStmts n) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        VisitorType auxiliar = new VisitorType();
+        salida +=".data" + "\n";
+        for (String x : auxiliar.tabla_de_tipos.keySet()){
+            if(auxiliar.tabla_de_tipos.get(x) == 1){
+                salida += x + ":" + "\t.word 0" + "\n";
+            }
+            
+        }
+        salida +=".text" + "\n";
+        
+        for (Iterator i = n.getHijos().iterator(); i.hasNext(); ) {
+            Nodo hijo = (Nodo) i.next();
+            if ( hijo != null){
+                hijo.accept(this);    
+            }    
+        }
+        salida += "nop \n";
+        this.escribeCodigo();
     }
 
     @Override
     public void visit(IfStmts n) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
     public void visit(IfNodo n) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
     public void visit(NodoPrint n) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Nodo nodo = n.getPrimerHijo();
+
+        // Registro objetivo
+        int tipo = n.getType();
+        boolean entero =  tipo!=2;
+
+        String objetivo = reg.getObjetivo(entero);
+        String[] siguientes = reg.getNSiguientes(1,entero);
+
+        // Codigo hijo
+        reg.setObjetivo(siguientes[0]);
+        nodo.accept(this);
+        String nombre = nodo.getNombre();
+        if(nombre != null){
+           salida +="lw " + objetivo + ", " + nombre + "\n";
+        }
+        
+        salida +="li $v0,1\n";
+        salida +="add  $a0, $zero, " + objetivo + "\n";
+        salida +="syscall" + "\n";
     }
 
     @Override
     public void visit(WhileNodo n) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("Not supported yet.");
     }
     
     /**
@@ -286,5 +384,10 @@ public class VisitorGenerator implements Visitor {
         ret+="\n    jr $ra";
         System.out.println(ret);
         return ret;
+    }
+    
+    private void escribeCodigo(){
+        // TODO: ARREGLAR COSAS CON EL COMPILADOR PARA PODER HACER ESTE
+        // METODO
     }
 }
