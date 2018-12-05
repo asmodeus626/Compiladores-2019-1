@@ -16,7 +16,7 @@ public class Compilador {
         parser  = new Parser(fuente);
         v_print = new VisitorPrint();
         v_type  = new VisitorType();
-        v_generate = new VisitorGenerator();
+        v_generate = new VisitorGenerator(v_type);
     }
 
     public void ConstruyeAST(boolean debug) {
@@ -38,19 +38,27 @@ public class Compilador {
     }
 
     public static void main(String[] args) {
-            String archivo = "src/main/resources/test.p";
+            int numTest = 4; //Cambiar para una prueba diferente
+            String archivo = "src/main/resources/test"+numTest+".p";
         try{
             Reader a = new FileReader(archivo);
             Compilador c  = new Compilador(a);
             c.ConstruyeAST(true);
             c.imprimeAST();
-            c.verificaTiposAST();
+            
+            try{
+                c.verificaTiposAST();
+            }catch(Exception e){}
+            
             c.genera(); //Genera el archivo en ensamblador
-            c.v_generate.escribeCodigo(c.v_type);
+            c.v_generate.escribeCodigo();
         }catch(FileNotFoundException e) {
             System.err.println("El archivo " + archivo +" no fue encontrado. ");
         }catch(ArrayIndexOutOfBoundsException e) {
+            e.printStackTrace();
             System.err.println("Uso: java Compilador [archivo.p]: ");
+        }catch(Exception e){
+            e.printStackTrace();
         }
     }
 }

@@ -21,11 +21,10 @@ public class VisitorType implements Visitor {
     
     private boolean estaDeclarada(String nombre) {
         if(nombre != null) {
-            if(this.tabla_de_tipos.containsKey(nombre)) {
+            if(nombre.equals("true") || nombre.equals("false") || this.tabla_de_tipos.containsKey(nombre)) {
                 return true;
             } else {
                 System.out.println("Variable " + nombre + " no declarada");
-                System.exit(0);
             }
         }
         return false;
@@ -33,7 +32,6 @@ public class VisitorType implements Visitor {
     
     private void Incompatibilidad(String operador, int tipo_izq, int tipo_der) {
         System.out.println("Incompatibilidad de tipos para el operador " + operador + " [" + SistemaDeTipos.getTipo(tipo_izq) + " , " + SistemaDeTipos.getTipo(tipo_der) + "]" );
-        System.exit(0);
     }
     
     @Override
@@ -87,7 +85,6 @@ public class VisitorType implements Visitor {
         if(this.tabla_de_tipos.containsKey(nombre_izq)) {
             if(tipo_der != tabla_de_tipos.get(nombre_izq)) {
                System.out.println("la variable " + nombre_izq + " tiene 2 asignaciones de tipos primero se definio como : " + SistemaDeTipos.getTipo(this.tabla_de_tipos.get(nombre_der)) + " despues como : " + SistemaDeTipos.getTipo(tipo_der));
-               System.exit(0);
             }
         } else {
             this.tabla_de_tipos.put(nombre_izq , tipo_der);
@@ -560,7 +557,6 @@ public class VisitorType implements Visitor {
              n.setTipo(tipo);
         } else {
             System.out.println("Incompatibilidad de tipos para el operador 'not' " + "[" + SistemaDeTipos.getTipo(tipo) + "]" );
-            System.exit(0);
         }
     }
 
@@ -638,7 +634,6 @@ public class VisitorType implements Visitor {
 
     private void ErrorCondicion(String operador) {
         System.out.println("Error la condicion del " +  operador  + " debe de ser booleana");
-        System.exit(0);
     }
 
     @Override

@@ -261,7 +261,7 @@ public class VisitorPrint implements Visitor {
             Nodo hijo =(Nodo) i.next();
             System.out.print("[");
             if(hijo != null) {
-                hijo.accept(this);    
+                hijo.accept(this);
             }    
             System.out.println("]");
         }

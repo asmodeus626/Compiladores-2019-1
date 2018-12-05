@@ -17,7 +17,7 @@ package ast;
 
 
 
-//#line 3 "/home/rodd/Documentos/2019-I/Compiladores-2019-1/Proyectos/Proyecto_4/src/main/byaccj/gramatica2.y"
+//#line 3 "/home/emmanuel/Documentos/Compiladores/Compiladores-2019-1/Proyectos/Proyecto_4/src/main/byaccj/gramatica2.y"
   import ast.Flexer;
   import ast.patron.compuesto.*;
   import java.io.*;
@@ -407,7 +407,7 @@ final static String yyrule[] = {
 "atom : '(' test ')'",
 };
 
-//#line 115 "/home/rodd/Documentos/2019-I/Compiladores-2019-1/Proyectos/Proyecto_4/src/main/byaccj/gramatica2.y"
+//#line 115 "/home/emmanuel/Documentos/Compiladores/Compiladores-2019-1/Proyectos/Proyecto_4/src/main/byaccj/gramatica2.y"
 
   private Flexer lexer;
   public Nodo raiz;
@@ -602,223 +602,223 @@ boolean doaction;
       {
 //########## USER-SUPPLIED ACTIONS ##########
 case 2:
-//#line 13 "/home/rodd/Documentos/2019-I/Compiladores-2019-1/Proyectos/Proyecto_4/src/main/byaccj/gramatica2.y"
+//#line 13 "/home/emmanuel/Documentos/Compiladores/Compiladores-2019-1/Proyectos/Proyecto_4/src/main/byaccj/gramatica2.y"
 {System.out.println("Reconocimiento exitoso"); raiz = val_peek(0);}
 break;
 case 3:
-//#line 16 "/home/rodd/Documentos/2019-I/Compiladores-2019-1/Proyectos/Proyecto_4/src/main/byaccj/gramatica2.y"
+//#line 16 "/home/emmanuel/Documentos/Compiladores/Compiladores-2019-1/Proyectos/Proyecto_4/src/main/byaccj/gramatica2.y"
 {yyval = val_peek(1);}
 break;
 case 4:
-//#line 17 "/home/rodd/Documentos/2019-I/Compiladores-2019-1/Proyectos/Proyecto_4/src/main/byaccj/gramatica2.y"
+//#line 17 "/home/emmanuel/Documentos/Compiladores/Compiladores-2019-1/Proyectos/Proyecto_4/src/main/byaccj/gramatica2.y"
 {val_peek(1).agregaHijoFinal(val_peek(0)); yyval = val_peek(1);}
 break;
 case 6:
-//#line 19 "/home/rodd/Documentos/2019-I/Compiladores-2019-1/Proyectos/Proyecto_4/src/main/byaccj/gramatica2.y"
+//#line 19 "/home/emmanuel/Documentos/Compiladores/Compiladores-2019-1/Proyectos/Proyecto_4/src/main/byaccj/gramatica2.y"
 {yyval = new NodoStmts(val_peek(0));}
 break;
 case 7:
-//#line 22 "/home/rodd/Documentos/2019-I/Compiladores-2019-1/Proyectos/Proyecto_4/src/main/byaccj/gramatica2.y"
+//#line 22 "/home/emmanuel/Documentos/Compiladores/Compiladores-2019-1/Proyectos/Proyecto_4/src/main/byaccj/gramatica2.y"
 {yyval = val_peek(0);}
 break;
 case 8:
-//#line 23 "/home/rodd/Documentos/2019-I/Compiladores-2019-1/Proyectos/Proyecto_4/src/main/byaccj/gramatica2.y"
+//#line 23 "/home/emmanuel/Documentos/Compiladores/Compiladores-2019-1/Proyectos/Proyecto_4/src/main/byaccj/gramatica2.y"
 {yyval = val_peek(0);}
 break;
 case 9:
-//#line 26 "/home/rodd/Documentos/2019-I/Compiladores-2019-1/Proyectos/Proyecto_4/src/main/byaccj/gramatica2.y"
+//#line 26 "/home/emmanuel/Documentos/Compiladores/Compiladores-2019-1/Proyectos/Proyecto_4/src/main/byaccj/gramatica2.y"
 {linea++; yyval = val_peek(1);}
 break;
 case 10:
-//#line 29 "/home/rodd/Documentos/2019-I/Compiladores-2019-1/Proyectos/Proyecto_4/src/main/byaccj/gramatica2.y"
+//#line 29 "/home/emmanuel/Documentos/Compiladores/Compiladores-2019-1/Proyectos/Proyecto_4/src/main/byaccj/gramatica2.y"
 {yyval = val_peek(0);}
 break;
 case 11:
-//#line 30 "/home/rodd/Documentos/2019-I/Compiladores-2019-1/Proyectos/Proyecto_4/src/main/byaccj/gramatica2.y"
+//#line 30 "/home/emmanuel/Documentos/Compiladores/Compiladores-2019-1/Proyectos/Proyecto_4/src/main/byaccj/gramatica2.y"
 {yyval = val_peek(0);}
 break;
 case 12:
-//#line 33 "/home/rodd/Documentos/2019-I/Compiladores-2019-1/Proyectos/Proyecto_4/src/main/byaccj/gramatica2.y"
+//#line 33 "/home/emmanuel/Documentos/Compiladores/Compiladores-2019-1/Proyectos/Proyecto_4/src/main/byaccj/gramatica2.y"
 {yyval = new AsigNodo(val_peek(2) , val_peek(0));}
 break;
 case 13:
-//#line 34 "/home/rodd/Documentos/2019-I/Compiladores-2019-1/Proyectos/Proyecto_4/src/main/byaccj/gramatica2.y"
+//#line 34 "/home/emmanuel/Documentos/Compiladores/Compiladores-2019-1/Proyectos/Proyecto_4/src/main/byaccj/gramatica2.y"
 {yyval = val_peek(0);}
 break;
 case 14:
-//#line 37 "/home/rodd/Documentos/2019-I/Compiladores-2019-1/Proyectos/Proyecto_4/src/main/byaccj/gramatica2.y"
+//#line 37 "/home/emmanuel/Documentos/Compiladores/Compiladores-2019-1/Proyectos/Proyecto_4/src/main/byaccj/gramatica2.y"
 {yyval = new NodoPrint(val_peek(0));}
 break;
 case 15:
-//#line 40 "/home/rodd/Documentos/2019-I/Compiladores-2019-1/Proyectos/Proyecto_4/src/main/byaccj/gramatica2.y"
+//#line 40 "/home/emmanuel/Documentos/Compiladores/Compiladores-2019-1/Proyectos/Proyecto_4/src/main/byaccj/gramatica2.y"
 {yyval = val_peek(0);}
 break;
 case 16:
-//#line 41 "/home/rodd/Documentos/2019-I/Compiladores-2019-1/Proyectos/Proyecto_4/src/main/byaccj/gramatica2.y"
+//#line 41 "/home/emmanuel/Documentos/Compiladores/Compiladores-2019-1/Proyectos/Proyecto_4/src/main/byaccj/gramatica2.y"
 {yyval = val_peek(0);}
 break;
 case 17:
-//#line 44 "/home/rodd/Documentos/2019-I/Compiladores-2019-1/Proyectos/Proyecto_4/src/main/byaccj/gramatica2.y"
+//#line 44 "/home/emmanuel/Documentos/Compiladores/Compiladores-2019-1/Proyectos/Proyecto_4/src/main/byaccj/gramatica2.y"
 {yyval = new IfNodo(val_peek(5) , val_peek(3) , val_peek(0));}
 break;
 case 18:
-//#line 45 "/home/rodd/Documentos/2019-I/Compiladores-2019-1/Proyectos/Proyecto_4/src/main/byaccj/gramatica2.y"
+//#line 45 "/home/emmanuel/Documentos/Compiladores/Compiladores-2019-1/Proyectos/Proyecto_4/src/main/byaccj/gramatica2.y"
 {yyval = new IfNodo(val_peek(2) , val_peek(0));}
 break;
 case 19:
-//#line 48 "/home/rodd/Documentos/2019-I/Compiladores-2019-1/Proyectos/Proyecto_4/src/main/byaccj/gramatica2.y"
+//#line 48 "/home/emmanuel/Documentos/Compiladores/Compiladores-2019-1/Proyectos/Proyecto_4/src/main/byaccj/gramatica2.y"
 {yyval = new WhileNodo(val_peek(2) , val_peek(0));}
 break;
 case 20:
-//#line 51 "/home/rodd/Documentos/2019-I/Compiladores-2019-1/Proyectos/Proyecto_4/src/main/byaccj/gramatica2.y"
+//#line 51 "/home/emmanuel/Documentos/Compiladores/Compiladores-2019-1/Proyectos/Proyecto_4/src/main/byaccj/gramatica2.y"
 {yyval = val_peek(0);}
 break;
 case 21:
-//#line 52 "/home/rodd/Documentos/2019-I/Compiladores-2019-1/Proyectos/Proyecto_4/src/main/byaccj/gramatica2.y"
+//#line 52 "/home/emmanuel/Documentos/Compiladores/Compiladores-2019-1/Proyectos/Proyecto_4/src/main/byaccj/gramatica2.y"
 {yyval = val_peek(1);}
 break;
 case 22:
-//#line 55 "/home/rodd/Documentos/2019-I/Compiladores-2019-1/Proyectos/Proyecto_4/src/main/byaccj/gramatica2.y"
+//#line 55 "/home/emmanuel/Documentos/Compiladores/Compiladores-2019-1/Proyectos/Proyecto_4/src/main/byaccj/gramatica2.y"
 {val_peek(1).agregaHijoFinal(val_peek(0)); yyval = val_peek(1);}
 break;
 case 23:
-//#line 56 "/home/rodd/Documentos/2019-I/Compiladores-2019-1/Proyectos/Proyecto_4/src/main/byaccj/gramatica2.y"
+//#line 56 "/home/emmanuel/Documentos/Compiladores/Compiladores-2019-1/Proyectos/Proyecto_4/src/main/byaccj/gramatica2.y"
 {yyval = new NodoStmts(val_peek(0));}
 break;
 case 24:
-//#line 59 "/home/rodd/Documentos/2019-I/Compiladores-2019-1/Proyectos/Proyecto_4/src/main/byaccj/gramatica2.y"
+//#line 59 "/home/emmanuel/Documentos/Compiladores/Compiladores-2019-1/Proyectos/Proyecto_4/src/main/byaccj/gramatica2.y"
 {yyval = val_peek(0);}
 break;
 case 25:
-//#line 62 "/home/rodd/Documentos/2019-I/Compiladores-2019-1/Proyectos/Proyecto_4/src/main/byaccj/gramatica2.y"
+//#line 62 "/home/emmanuel/Documentos/Compiladores/Compiladores-2019-1/Proyectos/Proyecto_4/src/main/byaccj/gramatica2.y"
 {yyval = new OrNodo(val_peek(2) , val_peek(0));}
 break;
 case 26:
-//#line 63 "/home/rodd/Documentos/2019-I/Compiladores-2019-1/Proyectos/Proyecto_4/src/main/byaccj/gramatica2.y"
+//#line 63 "/home/emmanuel/Documentos/Compiladores/Compiladores-2019-1/Proyectos/Proyecto_4/src/main/byaccj/gramatica2.y"
 {yyval = val_peek(0);}
 break;
 case 27:
-//#line 66 "/home/rodd/Documentos/2019-I/Compiladores-2019-1/Proyectos/Proyecto_4/src/main/byaccj/gramatica2.y"
+//#line 66 "/home/emmanuel/Documentos/Compiladores/Compiladores-2019-1/Proyectos/Proyecto_4/src/main/byaccj/gramatica2.y"
 {yyval = new AndNodo(val_peek(2) , val_peek(0));}
 break;
 case 28:
-//#line 67 "/home/rodd/Documentos/2019-I/Compiladores-2019-1/Proyectos/Proyecto_4/src/main/byaccj/gramatica2.y"
+//#line 67 "/home/emmanuel/Documentos/Compiladores/Compiladores-2019-1/Proyectos/Proyecto_4/src/main/byaccj/gramatica2.y"
 {yyval = val_peek(0);}
 break;
 case 29:
-//#line 70 "/home/rodd/Documentos/2019-I/Compiladores-2019-1/Proyectos/Proyecto_4/src/main/byaccj/gramatica2.y"
+//#line 70 "/home/emmanuel/Documentos/Compiladores/Compiladores-2019-1/Proyectos/Proyecto_4/src/main/byaccj/gramatica2.y"
 {yyval = new NotNodo(val_peek(0));}
 break;
 case 30:
-//#line 71 "/home/rodd/Documentos/2019-I/Compiladores-2019-1/Proyectos/Proyecto_4/src/main/byaccj/gramatica2.y"
+//#line 71 "/home/emmanuel/Documentos/Compiladores/Compiladores-2019-1/Proyectos/Proyecto_4/src/main/byaccj/gramatica2.y"
 {yyval = val_peek(0);}
 break;
 case 31:
-//#line 74 "/home/rodd/Documentos/2019-I/Compiladores-2019-1/Proyectos/Proyecto_4/src/main/byaccj/gramatica2.y"
+//#line 74 "/home/emmanuel/Documentos/Compiladores/Compiladores-2019-1/Proyectos/Proyecto_4/src/main/byaccj/gramatica2.y"
 {val_peek(1).agregaHijoPrincipio(val_peek(2)); val_peek(1).agregaHijoFinal(val_peek(0)); yyval = val_peek(1);}
 break;
 case 32:
-//#line 75 "/home/rodd/Documentos/2019-I/Compiladores-2019-1/Proyectos/Proyecto_4/src/main/byaccj/gramatica2.y"
+//#line 75 "/home/emmanuel/Documentos/Compiladores/Compiladores-2019-1/Proyectos/Proyecto_4/src/main/byaccj/gramatica2.y"
 {yyval = val_peek(0);}
 break;
 case 33:
-//#line 78 "/home/rodd/Documentos/2019-I/Compiladores-2019-1/Proyectos/Proyecto_4/src/main/byaccj/gramatica2.y"
+//#line 78 "/home/emmanuel/Documentos/Compiladores/Compiladores-2019-1/Proyectos/Proyecto_4/src/main/byaccj/gramatica2.y"
 {yyval = new MenorNodo(null , null);}
 break;
 case 34:
-//#line 79 "/home/rodd/Documentos/2019-I/Compiladores-2019-1/Proyectos/Proyecto_4/src/main/byaccj/gramatica2.y"
+//#line 79 "/home/emmanuel/Documentos/Compiladores/Compiladores-2019-1/Proyectos/Proyecto_4/src/main/byaccj/gramatica2.y"
 {yyval = new MayorNodo(null , null);}
 break;
 case 35:
-//#line 80 "/home/rodd/Documentos/2019-I/Compiladores-2019-1/Proyectos/Proyecto_4/src/main/byaccj/gramatica2.y"
+//#line 80 "/home/emmanuel/Documentos/Compiladores/Compiladores-2019-1/Proyectos/Proyecto_4/src/main/byaccj/gramatica2.y"
 {yyval = new IgualIgualNodo(null , null);}
 break;
 case 36:
-//#line 81 "/home/rodd/Documentos/2019-I/Compiladores-2019-1/Proyectos/Proyecto_4/src/main/byaccj/gramatica2.y"
+//#line 81 "/home/emmanuel/Documentos/Compiladores/Compiladores-2019-1/Proyectos/Proyecto_4/src/main/byaccj/gramatica2.y"
 {yyval = new MayorIgualNodo(null , null);}
 break;
 case 37:
-//#line 82 "/home/rodd/Documentos/2019-I/Compiladores-2019-1/Proyectos/Proyecto_4/src/main/byaccj/gramatica2.y"
+//#line 82 "/home/emmanuel/Documentos/Compiladores/Compiladores-2019-1/Proyectos/Proyecto_4/src/main/byaccj/gramatica2.y"
 {yyval = new MenorIgualNodo(null , null);}
 break;
 case 38:
-//#line 83 "/home/rodd/Documentos/2019-I/Compiladores-2019-1/Proyectos/Proyecto_4/src/main/byaccj/gramatica2.y"
+//#line 83 "/home/emmanuel/Documentos/Compiladores/Compiladores-2019-1/Proyectos/Proyecto_4/src/main/byaccj/gramatica2.y"
 {yyval = new DiferenteNodo(null , null);}
 break;
 case 39:
-//#line 86 "/home/rodd/Documentos/2019-I/Compiladores-2019-1/Proyectos/Proyecto_4/src/main/byaccj/gramatica2.y"
+//#line 86 "/home/emmanuel/Documentos/Compiladores/Compiladores-2019-1/Proyectos/Proyecto_4/src/main/byaccj/gramatica2.y"
 {yyval = new AddNodo(val_peek(2),val_peek(0));}
 break;
 case 40:
-//#line 87 "/home/rodd/Documentos/2019-I/Compiladores-2019-1/Proyectos/Proyecto_4/src/main/byaccj/gramatica2.y"
+//#line 87 "/home/emmanuel/Documentos/Compiladores/Compiladores-2019-1/Proyectos/Proyecto_4/src/main/byaccj/gramatica2.y"
 {yyval = new DifNodo(val_peek(2),val_peek(0));}
 break;
 case 41:
-//#line 88 "/home/rodd/Documentos/2019-I/Compiladores-2019-1/Proyectos/Proyecto_4/src/main/byaccj/gramatica2.y"
+//#line 88 "/home/emmanuel/Documentos/Compiladores/Compiladores-2019-1/Proyectos/Proyecto_4/src/main/byaccj/gramatica2.y"
 {yyval = val_peek(0);}
 break;
 case 42:
-//#line 91 "/home/rodd/Documentos/2019-I/Compiladores-2019-1/Proyectos/Proyecto_4/src/main/byaccj/gramatica2.y"
+//#line 91 "/home/emmanuel/Documentos/Compiladores/Compiladores-2019-1/Proyectos/Proyecto_4/src/main/byaccj/gramatica2.y"
 {yyval = new PorNodo(val_peek(2) , val_peek(0));}
 break;
 case 43:
-//#line 92 "/home/rodd/Documentos/2019-I/Compiladores-2019-1/Proyectos/Proyecto_4/src/main/byaccj/gramatica2.y"
+//#line 92 "/home/emmanuel/Documentos/Compiladores/Compiladores-2019-1/Proyectos/Proyecto_4/src/main/byaccj/gramatica2.y"
 {yyval = new DivNodo(val_peek(2) , val_peek(0));}
 break;
 case 44:
-//#line 93 "/home/rodd/Documentos/2019-I/Compiladores-2019-1/Proyectos/Proyecto_4/src/main/byaccj/gramatica2.y"
+//#line 93 "/home/emmanuel/Documentos/Compiladores/Compiladores-2019-1/Proyectos/Proyecto_4/src/main/byaccj/gramatica2.y"
 {yyval = new ModuloNodo(val_peek(2) , val_peek(0));}
 break;
 case 45:
-//#line 94 "/home/rodd/Documentos/2019-I/Compiladores-2019-1/Proyectos/Proyecto_4/src/main/byaccj/gramatica2.y"
+//#line 94 "/home/emmanuel/Documentos/Compiladores/Compiladores-2019-1/Proyectos/Proyecto_4/src/main/byaccj/gramatica2.y"
 {yyval = new DivisionEnteraNodo(val_peek(2) , val_peek(0));}
 break;
 case 46:
-//#line 95 "/home/rodd/Documentos/2019-I/Compiladores-2019-1/Proyectos/Proyecto_4/src/main/byaccj/gramatica2.y"
+//#line 95 "/home/emmanuel/Documentos/Compiladores/Compiladores-2019-1/Proyectos/Proyecto_4/src/main/byaccj/gramatica2.y"
 {yyval = val_peek(0);}
 break;
 case 47:
-//#line 97 "/home/rodd/Documentos/2019-I/Compiladores-2019-1/Proyectos/Proyecto_4/src/main/byaccj/gramatica2.y"
+//#line 97 "/home/emmanuel/Documentos/Compiladores/Compiladores-2019-1/Proyectos/Proyecto_4/src/main/byaccj/gramatica2.y"
 {yyval = new AddNodo(null,val_peek(0));}
 break;
 case 48:
-//#line 98 "/home/rodd/Documentos/2019-I/Compiladores-2019-1/Proyectos/Proyecto_4/src/main/byaccj/gramatica2.y"
+//#line 98 "/home/emmanuel/Documentos/Compiladores/Compiladores-2019-1/Proyectos/Proyecto_4/src/main/byaccj/gramatica2.y"
 {yyval = new DifNodo(null, val_peek(0));}
 break;
 case 49:
-//#line 99 "/home/rodd/Documentos/2019-I/Compiladores-2019-1/Proyectos/Proyecto_4/src/main/byaccj/gramatica2.y"
+//#line 99 "/home/emmanuel/Documentos/Compiladores/Compiladores-2019-1/Proyectos/Proyecto_4/src/main/byaccj/gramatica2.y"
 {yyval = val_peek(0);}
 break;
 case 50:
-//#line 102 "/home/rodd/Documentos/2019-I/Compiladores-2019-1/Proyectos/Proyecto_4/src/main/byaccj/gramatica2.y"
+//#line 102 "/home/emmanuel/Documentos/Compiladores/Compiladores-2019-1/Proyectos/Proyecto_4/src/main/byaccj/gramatica2.y"
 {yyval = new PowNodo(val_peek(2), val_peek(0));}
 break;
 case 51:
-//#line 103 "/home/rodd/Documentos/2019-I/Compiladores-2019-1/Proyectos/Proyecto_4/src/main/byaccj/gramatica2.y"
+//#line 103 "/home/emmanuel/Documentos/Compiladores/Compiladores-2019-1/Proyectos/Proyecto_4/src/main/byaccj/gramatica2.y"
 {yyval = val_peek(0);}
 break;
 case 52:
-//#line 106 "/home/rodd/Documentos/2019-I/Compiladores-2019-1/Proyectos/Proyecto_4/src/main/byaccj/gramatica2.y"
+//#line 106 "/home/emmanuel/Documentos/Compiladores/Compiladores-2019-1/Proyectos/Proyecto_4/src/main/byaccj/gramatica2.y"
 {yyval = val_peek(0);}
 break;
 case 53:
-//#line 107 "/home/rodd/Documentos/2019-I/Compiladores-2019-1/Proyectos/Proyecto_4/src/main/byaccj/gramatica2.y"
+//#line 107 "/home/emmanuel/Documentos/Compiladores/Compiladores-2019-1/Proyectos/Proyecto_4/src/main/byaccj/gramatica2.y"
 {yyval = val_peek(0);}
 break;
 case 54:
-//#line 108 "/home/rodd/Documentos/2019-I/Compiladores-2019-1/Proyectos/Proyecto_4/src/main/byaccj/gramatica2.y"
+//#line 108 "/home/emmanuel/Documentos/Compiladores/Compiladores-2019-1/Proyectos/Proyecto_4/src/main/byaccj/gramatica2.y"
 {yyval = val_peek(0);}
 break;
 case 55:
-//#line 109 "/home/rodd/Documentos/2019-I/Compiladores-2019-1/Proyectos/Proyecto_4/src/main/byaccj/gramatica2.y"
+//#line 109 "/home/emmanuel/Documentos/Compiladores/Compiladores-2019-1/Proyectos/Proyecto_4/src/main/byaccj/gramatica2.y"
 {yyval = val_peek(0);}
 break;
 case 56:
-//#line 110 "/home/rodd/Documentos/2019-I/Compiladores-2019-1/Proyectos/Proyecto_4/src/main/byaccj/gramatica2.y"
+//#line 110 "/home/emmanuel/Documentos/Compiladores/Compiladores-2019-1/Proyectos/Proyecto_4/src/main/byaccj/gramatica2.y"
 {yyval = val_peek(0);}
 break;
 case 57:
-//#line 111 "/home/rodd/Documentos/2019-I/Compiladores-2019-1/Proyectos/Proyecto_4/src/main/byaccj/gramatica2.y"
+//#line 111 "/home/emmanuel/Documentos/Compiladores/Compiladores-2019-1/Proyectos/Proyecto_4/src/main/byaccj/gramatica2.y"
 {yyval = val_peek(1);}
 break;
 //#line 756 "Parser.java"
